@@ -4,6 +4,8 @@ const Otp = require("../Models/Otp");
 const User = require("../Models/User");
 const otp_generator = require("otp-generator");
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 exports.sendOtp = async(req,res) => {
     try {
@@ -58,7 +60,6 @@ exports.sendOtp = async(req,res) => {
             success: true,
             message : 'otp send succcessfully',
             data : otpdata,
-            otp : otp,
           });    
     }catch(error)
     {
@@ -145,13 +146,79 @@ exports.signUp = async(req,res) => {
     return res.status(200).json({
         success : true,
         message : 'registration successfull',
+        userdetails,
     });
   }catch(error)
   {
     return res.status(500).json({
         success: false,
         message : 'error at registration side'
+
     })
   }
     
+}
+
+exports.signIn = async(req,res) => {
+    try {
+
+        const {emailAddress,password} = req.body;
+
+        if(!emailAddress || !password)
+        {
+            return res.status(400).json({
+                success: false,
+                message : 'enter all details',
+            });
+        }
+
+        const existUser = await User.findOne({emailAddress : emailAddress});
+
+        if(!existUser) {
+            return res.status(400).json({
+                success: false,
+                message : 'please do your registeration',
+            }); 
+        }
+
+        if(await bcrypt.compare(password,existUser.password))  {
+            // building token 
+            const payload = {
+                id : existUser._id,
+                emailAddress : existUser.emailAddress,
+                accountType : existUser.accountType
+            }
+
+            const token = jwt.sign(payload,process.env.JWT_SECRET,{
+                expiresIn : "24h",
+            });
+            
+            existUser.password = undefined;
+            existUser.token = token;
+
+            // building a cookie
+
+            const options = {
+                expires :  new Date(Date.now() + 3*24*60*60*1000),
+                httpOnly : true,
+            }
+            res.cookie("token",token,options).status(200).json({
+                success: true,
+                token,
+                existUser,
+                message: 'Login Successfully',
+            })
+        }else {
+            return res.status(401).json({
+                success: false,
+                message: 'entered wrong password',
+            }); 
+        }
+    }catch(error)
+    {
+        return res.status(500).json({
+            success: false,
+            message: 'error at signin part'
+        })
+    }
 }

@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 // controllers
-const {sendOtp,signUp} = require('../Controllers/Auth');
+const {sendOtp,signUp,signIn} = require('../Controllers/Auth');
 
 router.post('/sendotp',sendOtp);
 router.post('/signup',signUp);
-
+router.post('/signin',signIn);
 module.exports = router;
