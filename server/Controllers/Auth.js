@@ -3,13 +3,15 @@
 const Otp = require("../Models/Otp");
 const User = require("../Models/User");
 const otp_generator = require("otp-generator");
+const bcrypt = require('bcrypt');
+
 exports.sendOtp = async(req,res) => {
     try {
-          const {emailAddress} = req.body;
           
+          const {emailAddress} = req.body;
           // email address given ?
           if(!emailAddress)
-          {
+          {    
                return res.status(404).json({
                   success : false,
                   message : 'enter your email address',
@@ -18,8 +20,8 @@ exports.sendOtp = async(req,res) => {
 
 
           // find existing user   
-          const existUser = await User.findOne({emailAddress : emailAddress});
-
+          const existUser = await User.findOne({emailAddress});
+          console.log("hee")
           if(existUser)
           {
             return res.status(401).json({
@@ -55,12 +57,14 @@ exports.sendOtp = async(req,res) => {
           return res.status(200).json({
             success: true,
             message : 'otp send succcessfully',
+            data : otpdata,
+            otp : otp,
           });    
     }catch(error)
     {
         return res.status(500).json({
             success: false,
-            message : 'error at sending otp',
+            message : 'error at otp',
           });
     }
 }
@@ -109,7 +113,6 @@ exports.signUp = async(req,res) => {
 
     // verifying otp
     const recentOtp = await Otp.find({emailAddress}).sort({createdAt : -1}).limit(1);
-    console.log(recentOtp);
     if(recentOtp.length === 0)
     {
         return res.status(400).json({
@@ -151,5 +154,4 @@ exports.signUp = async(req,res) => {
     })
   }
     
-
 }
