@@ -16,7 +16,9 @@ app.use(cookiePaser());
 
 //routes
 const authRoutes = require('./Routes/Auth');
+const problemsRoutes = require('./Routes/Problems');
 app.use("/api/v1/auth",authRoutes);
+app.use("/api/v1/problems",problemsRoutes);
 
 //database
 const {dbConnect} = require('./config/database');

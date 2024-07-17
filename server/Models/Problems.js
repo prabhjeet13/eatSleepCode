@@ -17,6 +17,10 @@ const ProblemsSchema = new mongoose.Schema({
         required : true,
     }, 
 
+    tag : {
+       type : String,
+       required : true, 
+    },
     testCases : [{
         type : mongoose.Schema.Types.ObjectId,
         ref : "TestCases",
