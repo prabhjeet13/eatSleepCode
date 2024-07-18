@@ -4,6 +4,7 @@ const {v4} = require('uuid');
 const outPath = require('./executecpp');
 const codesDirectory = path.join(__dirname,'codes'); // it will give path till compiler.js parent folder and add this folder if not added
 
+const {executecpp} = require('../Controllers/executecpp');
 
 if(!fs.existsSync(codesDirectory))
 {
@@ -30,16 +31,15 @@ exports.executeyourcode = async(req,res) => {
 
         
         const outputpath = await executecpp(filepath);
-            
-
-
-
+         
+        res.status(200).json({filepath,outputpath})
 
     }catch(error)
     {
         return res.status(500).json({
             success: false,
-            message : `error at complie part : ${error}`, 
+            message : `error at complie part : ${error}`,
+            error, 
         });
     }
 }

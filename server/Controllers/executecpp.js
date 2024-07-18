@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const {v4} = require('uuid');
-
+const {exec} = require('child_process');
 const outputDirectory = path.join(__dirname,'outputs');
 if(!fs.existsSync(outputDirectory))
 {
@@ -18,7 +18,7 @@ exports.executecpp = async(filepath) => {
 
 
     return new Promise((resolve,reject) => (
-        exec(`g++ ${filepath} -o ${outPath} && cd ${outPath} && .\\${output_filename}`,(error,stdout,stderr) => {
+        exec(`g++ ${filepath} -o ${outPath} && cd ${outputDirectory} && .\\${output_filename}`,(error,stdout,stderr) => {
             if(error)
             {
                 reject({error,stderr})
