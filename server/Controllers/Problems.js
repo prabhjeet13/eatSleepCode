@@ -101,6 +101,24 @@ exports.getProblemByTag = async(req,res) => {
         })
     }
 }
+exports.getallProblems = async(req,res) => {
+
+    try {
+        const allProblems = await Problems.find({}).sort({createdat : -1});
+
+        return res.status(200).json({
+            success : true,
+            message : 'all problems fetch successfully',
+            allProblems,
+        });
+    }catch(error)
+    {
+        return res.status(500).json({
+            success : false,
+            message : 'internal error at problem fetching by tags'
+        })
+    }
+}
 
 exports.getProblemById = async(req,res) => {
     try {

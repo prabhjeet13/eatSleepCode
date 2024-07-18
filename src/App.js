@@ -7,6 +7,8 @@ import LoginPage from './pages/LoginPage';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import './App.css';
+import ProblemsByTagPage from './pages/ProblemsByTagPage';
+import Problems from './pages/Problems';
 import Navbar from './components/common/Navbar';
 
 function App() {
@@ -21,7 +23,14 @@ function App() {
              <Route path = "/contact" element = {<ContactUs/>} />
              <Route path = "/verifyemail" element = {<VerifyEmail/>} />
              <Route path = "/signin" element = {<LoginPage/>} />
-             <Route path = "/signup" element = {<SignUp/>} />   
+             <Route path = "/signup" element = {<SignUp/>} /> 
+
+
+
+
+             <Route path = "/problems" element = {<Problems />} />
+             <Route path = "/problems/:problemTag" element = {<ProblemsByTagPage/>} />
+
         </Routes>
     </div>
   );
