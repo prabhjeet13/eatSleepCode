@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import { HiChevronDown } from 'react-icons/hi'
 import {Table, Thead, Tbody, Th, Tr,Td} from 'react-super-responsive-table';
 import {tagProblemsfromDatabase} from '../apiservices/fetchingApiFunctions';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 const ProblemsByTagPage = () => {
   const {tag} = useParams();
   const [TagProblems,setTagProblems] = useState([]);

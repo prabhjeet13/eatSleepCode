@@ -3,6 +3,7 @@ import {HiChevronDown} from 'react-icons/hi';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Table,Tr, Td, Tbody,Th , Thead} from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 const Problems = () => {
 
   const [problems,setProblems] = useState(null);
