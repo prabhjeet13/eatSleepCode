@@ -29,7 +29,7 @@ function App() {
 
 
              <Route path = "/problems" element = {<Problems />} />
-             <Route path = "/problems/:problemTag" element = {<ProblemsByTagPage/>} />
+             <Route path = "/problems/:tag" element = {<ProblemsByTagPage/>} />
 
         </Routes>
     </div>

@@ -1,10 +1,23 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useState } from 'react';
+import { Link, useParams } from 'react-router-dom'
 import { HiChevronDown } from 'react-icons/hi'
+import {Table, Thead, Tbody, Th, Tr,Td} from 'react-super-responsive-table';
+import {tagProblemsfromDatabase} from '../apiservices/fetchingApiFunctions';
 const ProblemsByTagPage = () => {
+  const {tag} = useParams();
+  const [TagProblems,setTagProblems] = useState([]);
+
+  useEffect(() => {
+         const fetchttagproblems = async() => {
+            const output = await tagProblemsfromDatabase(tag);
+            console.log(output);
+            setTagProblems(output);
+         }
+         fetchttagproblems();
+  },[tag]);
   return (
     <div className='w-11/12 max-w-[1260px] mx-auto flex flex-col items-center justify-center mt-5'>
-
         {/* drop down for tag */}
                 <div className='text-center border-2 border-black flex gap-2 p-2 font-mono font-bold round-md items-center text-xl group relative transition-all duration-200'> 
                     Difficulty 
@@ -22,7 +35,35 @@ const ProblemsByTagPage = () => {
                         </Link>
                     </div>
                 </div>
-        {/* table for all problems by tag wise*/}
+                { 
+                  TagProblems && (
+                  <Table className = 'border-2 font-bold font-mono text-xl mt-5 w-full border-black'>
+                        <Thead>
+                            <Th className = 'flex flex-row justify-evenly p-2'>
+                                <Td>Problem-Name</Td>
+                                <Td className = 'mr-10'>Tag</Td>
+                            </Th>
+                        </Thead>
+                        <Tbody>
+                          {
+                            TagProblems.map((ele) => {
+                              return (
+                               <Link to = {`/problems/${ele._id}`}> 
+                                <div className='cursor-pointer'>
+                                  <Tr className = 'flex justify-evenly  border-black border-2 p-2'>
+                                    <Td>{ele.problemName}</Td>
+                                    <Td>{ele.tag}</Td>
+                                  </Tr>
+                                </div>  
+                               </Link> 
+                              ) 
+                            })
+                          }
+                        </Tbody>
+
+                  </Table>
+                  ) 
+                }
     </div>
   )
 }

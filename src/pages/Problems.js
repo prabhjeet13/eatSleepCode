@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import {HiChevronDown} from 'react-icons/hi';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
+import { Table,Tr, Td, Tbody,Th , Thead} from 'react-super-responsive-table';
 const Problems = () => {
 
-  const [p,sp] = useState(null);
+  const [problems,setProblems] = useState(null);
   
   useEffect( () => {
       const fetchingproblems = async() => {
@@ -17,8 +18,7 @@ const Problems = () => {
               headers : null,
             });
             console.log(output.data.allProblems[0]);
-            // setallProblems(output.data);
-            sp(output.data.allProblems);
+            setProblems(output.data.allProblems);
         }catch(error)
         {
             console.log(error);
@@ -34,7 +34,7 @@ const Problems = () => {
         <div className='w-11/12 max-w-[1260px] flex flex-col items-center justify-center mt-5 mx-auto'>
                 
                 {/* drop down */}
-                <div className='text-center border-2 border-black flex gap-2 p-2 font-mono font-bold round-md items-center text-xl group relative transition-all duration-200'> 
+                <div  className='text-center border-2 border-black flex gap-2 p-2 font-mono font-bold round-md items-center text-xl group relative transition-all duration-200'> 
                     Difficulty 
                     <HiChevronDown />
                     
@@ -51,13 +51,34 @@ const Problems = () => {
                     </div>
                 </div>
                 {/* table */}
+                { 
+                  problems && (
+                  <Table className = 'border-2 font-bold font-mono text-xl mt-5 w-full border-black'>
+                        <Thead>
+                            <Th className = 'flex flex-row justify-evenly p-2'>
+                                <Td className = 'border-black'>Problem-Name</Td>
+                                <Td className = 'mr-10'>Tag</Td>
+                            </Th>
+                        </Thead>
+                        <Tbody>
+                          {
+                            problems.map((ele) => {
+                              return (
+                               <Link to = {`/problems/${ele._id}`}> 
+                                <div className='cursor-pointer'>
+                                  <Tr className = 'flex justify-evenly  border-black border-2 p-2'>
+                                    <Td>{ele.problemName}</Td>
+                                    <Td>{ele.tag}</Td>
+                                  </Tr>
+                                </div>  
+                               </Link> 
+                              ) 
+                            })
+                          }
+                        </Tbody>
 
-                {
-                  p && p.map((ele,index) => {
-                    return (
-                      <p>{ele.problemName}</p>
-                    )
-                  })
+                  </Table>
+                  ) 
                 }
         </div>
 
