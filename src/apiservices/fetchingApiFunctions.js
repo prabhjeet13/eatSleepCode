@@ -31,7 +31,7 @@ export const sendOtp = async(emailAddress,navigate) => {
         {
             throw new Error('nhi hua in otp sending error');
         }
-
+        
         navigate("/verifyemail");
     }catch(error)
     {
