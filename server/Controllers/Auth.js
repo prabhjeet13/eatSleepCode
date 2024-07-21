@@ -87,8 +87,6 @@ exports.signUp = async(req,res) => {
     // console.log(req.body);
     if(!firstName || !lastName || !emailAddress || !otp || !password || !confirmPassword || !accountType)
     {   
-        console.log(lastName,emailAddress,otp,accountType,password,confirmPassword);
-        console.log('kya hai hai')
         return res.status(404).json({
             success : false,
             message : 'enter your details',
