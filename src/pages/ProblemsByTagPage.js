@@ -49,7 +49,7 @@ const ProblemsByTagPage = () => {
                           {
                             TagProblems.map((ele) => {
                               return (
-                               <Link to = {`/problems/${ele._id}`}> 
+                               <Link to = {`/problems/problem/${ele._id}`}> 
                                 <div className='cursor-pointer'>
                                   <Tr className = 'flex justify-evenly  border-black border-2 p-2'>
                                     <Td>{ele.problemName}</Td>

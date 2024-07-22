@@ -2,6 +2,8 @@
 import {apiConnect} from '../apiservices/apiConnect';
 import {problemsAPI} from '../apiservices/allAPIs';
 import {authAPI} from '../apiservices/allAPIs';
+import { setToken } from '../slices/authSlice';
+import { setUser } from '../slices/userSlice';
 export const tagProblemsfromDatabase = async(tag) => {
 
     try {
@@ -64,3 +66,24 @@ export const signup = async(signupData,otp,navigate) => {
         }
 }
 
+
+export const signIn = async(navigate,formData,dispatch) => {
+
+        try {
+            const result = await apiConnect("POST",authAPI.signinapi,formData);
+
+            if(!result.data.success)
+            {
+                throw new Error("Not Able to login");
+            }
+
+            localStorage.setItem("user",JSON.stringify(result.data.existUser));
+            localStorage.setItem("token",JSON.stringify(result.data.token));
+            dispatch(setUser(result.data.existUser));
+            dispatch(setToken(result.data.token));
+            navigate("/dashboard/myProfile");
+        }catch(error)
+        {
+            console.log("error at login part");
+        }
+    }
