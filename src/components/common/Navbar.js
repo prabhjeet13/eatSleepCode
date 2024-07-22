@@ -1,6 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import imagebg from '../../assets/images/imagebg.jpg'
 const Navbar = () => {
+   const {user} = useSelector((state) => state.user);
+   const {token} = useSelector((state) => state.auth);
   return (
     <div className='h-14 py-10 mx-auto w-11/12 max-w-[1260px] flex flex-row gap-4 item-center justify-around border-b-2 border-blue-950'>
        <Link to = '/'>
@@ -27,7 +31,9 @@ const Navbar = () => {
        </div>
 
        {/* buttons login and signup*/}
-       <div className='flex flex-row gap-2'>
+       {
+         token === null && (
+            <div className='flex flex-row gap-2'>
             <Link to = "/signin">
               <button className='rounded-full py-1 px-4 bg-blue-800 text-lime-50  shadow-sm shadow-black h-max font-semibold transition-all duration-200 hover:bg-blue-900 hover:scale-95'>
                  Sign In
@@ -38,7 +44,21 @@ const Navbar = () => {
                  Sign Up
              </button>
             </Link>
-       </div>
+            </div>
+         )
+       }
+
+       {
+         token !== null && (
+            <>
+               <div>
+                  <button> <img src = {user.image} width={35} height={30} className='rounded-full'/> </button>
+               </div>
+               {/* <div>{user.image}</div> */}
+            </>
+         )
+       }
+ 
 
     </div>
   )

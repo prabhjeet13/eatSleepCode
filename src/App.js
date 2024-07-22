@@ -10,7 +10,9 @@ import './App.css';
 import ProblemsByTagPage from './pages/ProblemsByTagPage';
 import Problems from './pages/Problems';
 import Navbar from './components/common/Navbar';
-
+import ProblemPage from './pages/ProblemPage';
+import Dashboard from './pages/Dashboard';
+import MyProfile from './pages/MyProfile';
 function App() {
   return (
     <div className='w-screen min-h-screen bg-blue-400'>
@@ -30,6 +32,12 @@ function App() {
 
              <Route path = "/problems" element = {<Problems />} />
              <Route path = "/problems/:tag" element = {<ProblemsByTagPage/>} />
+             <Route path = "/problems/problem/:problemId" element = {<ProblemPage/>} />
+
+
+            <Route element = {<Dashboard/>}>
+                  <Route path = "/dashboard/myProfile" element = {<MyProfile/>}/>
+            </Route> 
 
         </Routes>
     </div>
