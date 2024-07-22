@@ -187,8 +187,7 @@ exports.getProblemById = async(req,res) => {
 
         const problemDataById = await Problems.findById({_id : problemId})
                                 .populate("problemCreater")
-                                // .populate("testCases")
-                                // .populate("solutionsSubmittedByCoder")
+                                .populate("testCases")
                                 .exec();
 
         return res.status(200).json({
@@ -196,8 +195,6 @@ exports.getProblemById = async(req,res) => {
                 message : 'details fetch completed',
                 problemDataById,
         });                         
-
-
 
     }catch(error)
     {
