@@ -1,7 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
-const AddProblemForm = () => {
+import { addproblemByCoder } from '../../../apiservices/fetchingApiFunctions';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../../../slices/userSlice';
+const AddProblemForm = () => {
+  const {step} = useSelector((state) => state.problem);
+  const {token} = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const [radioboxvalue,setradioboxvalue] = useState("easy");
   const textradioChange = (value) => {
         setradioboxvalue(value);
@@ -19,9 +25,9 @@ const AddProblemForm = () => {
     
     problemconstraints.push(constraint);
     setproblemconstraints(problemconstraints);
+    console.log(problemconstraints);
   }
 
-  console.log(problemconstraints);
 
   const [formData,setformData] = useState({
         problemName : "",
@@ -29,7 +35,6 @@ const AddProblemForm = () => {
         code : "",
   }) ; 
 
-  
 
   const textboxchange = (e) => {
     setformData( (prev) => ({
@@ -44,10 +49,12 @@ const AddProblemForm = () => {
         const bodyData = {
             ...formData,
             tag : radioboxvalue,
-            constraints : problemconstraints,
-        }
-        console.log(bodyData);
-  }
+            constraints : JSON.stringify(problemconstraints),
+        } 
+
+       addproblemByCoder(bodyData,token,dispatch);
+            // console.log(output);
+}
 
   return (
     <div className='mt-3 flex flex-col gap-4'>
@@ -61,7 +68,7 @@ const AddProblemForm = () => {
                     </div>
                     <div className='flex flex-col gap-2 font-bold'>
                         <label className='font-mono text-lg'>Problem Statement</label>
-                        <input value = {formData.problemStatement} name = 'problemStatement' id = 'problemStatement' type = 'text' className = 'p-2 bg-gray-700 text-white  text-lg font-semibold' onChange={textboxchange}/>
+                        <input value = {formData.problemStatement} name = 'problemStatement' id = 'problemStatement' type = 'text' className = ' p-2 bg-gray-700 text-white  text-lg font-semibold' onChange={textboxchange}/>
                     </div>
                     <div className='flex flex-col gap-2 font-bold'>
                         <label className='font-mono text-lg'> Tag </label>
@@ -74,7 +81,7 @@ const AddProblemForm = () => {
                     <div className='flex flex-col gap-3 font-bold'>
                         <label className='font-mono text-lg'>Constraints</label>
                         <input onChange={(e) => setpc(e.target.value)}  id = "pc" name = "pc" value = {`${pc}`} type = 'text' className = 'p-2 bg-gray-700 text-white  text-lg font-semibold'/>
-                        <p onClick={() => add(pc)} className='border-2 mt-2 bg-gray-800 p-2 text-white w-[50%]'> add constraint ? </p>
+                        <p onClick={() => add(pc)} className='border-2 mt-2 bg-gray-800 p-2 text-white w-[50%] cursor-pointer'> add constraint ? </p>
                     </div>
                     <div className='flex flex-col gap-2 font-bold'>
                         <label className='font-mono text-lg'>Correct Code</label>

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"; 
 
 const initialState = {
-    problem : null,
+    problemData : null,
     step : 1,
 }
 
@@ -10,7 +10,7 @@ const problemSlice = createSlice({
     initialState : initialState,
     reducers : {
         setProblem(state,value) {
-            state.problem = value.payload;
+            state.problemData = value.payload;
         },
         setStep(state,value) {
             state.step = value.payload;

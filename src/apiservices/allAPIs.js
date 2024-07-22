@@ -1,6 +1,8 @@
 
 export const problemsAPI = {
-    tagwise : "http://localhost:4000/api/v1/problems/getallproblemsByTagWise"
+    tagwise : "http://localhost:4000/api/v1/problems/getallproblemsByTagWise",
+    addProblem: "http://localhost:4000/api/v1/problems/addproblem",
+    addTestCase: "http://localhost:4000/api/v1/problems/addtestcases"
 }
 
 export const authAPI = {

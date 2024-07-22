@@ -4,6 +4,8 @@ import {problemsAPI} from '../apiservices/allAPIs';
 import {authAPI} from '../apiservices/allAPIs';
 import { setToken } from '../slices/authSlice';
 import { setUser } from '../slices/userSlice';
+import { setStep ,setProblem } from '../slices/problemSlice';
+import toast from 'react-hot-toast';
 export const tagProblemsfromDatabase = async(tag) => {
 
     try {
@@ -87,3 +89,48 @@ export const signIn = async(navigate,formData,dispatch) => {
             console.log("error at login part");
         }
     }
+
+export const addproblemByCoder = async(bodyData,token,dispatch) => {
+        try {
+
+            const ob = {
+                ...bodyData,
+                token,
+            }
+            const output = await apiConnect("POST",problemsAPI.addProblem,ob);
+
+            if(output.statusText !== "OK")
+            {
+                throw new Error('add problem mai issue');
+            }
+            console.log(output.data.problemDetails);
+            dispatch(setProblem(output.data.problemDetails));
+            dispatch(setStep(2));
+        }catch(error){
+            console.log("error at add problem part");
+        }
+}
+
+export const addproblemTestCaseByCoder = async(bodyData,token,dispatch) => {
+
+            let toastid = toast.loading("Loading..."); 
+            try {
+            const ob = {
+                ...bodyData,
+                token,
+            }
+            const output = await apiConnect("POST",problemsAPI.addTestCase,ob);
+            console.log(output);
+            if(output.statusText !== "OK")
+            {
+                throw new Error('add problem kai Test Cases mai issue');
+            }
+            console.log(output.data);
+            dispatch(setUser(output.data.userDetails));
+            dispatch(setProblem(output.data.problemDetails));
+            toast.success('testcase added');
+        }catch(error){
+            console.log("error at add problem kai test case part");
+        }
+        toast.dismiss(toastid);
+}
