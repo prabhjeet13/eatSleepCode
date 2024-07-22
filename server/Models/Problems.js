@@ -17,6 +17,11 @@ const ProblemsSchema = new mongoose.Schema({
         required : true,
     }, 
 
+    code : {
+       type : String,
+       required : true,     
+    },
+
     tag : {
        type : String,
        required : true, 

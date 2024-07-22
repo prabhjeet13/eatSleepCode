@@ -13,6 +13,8 @@ import Navbar from './components/common/Navbar';
 import ProblemPage from './pages/ProblemPage';
 import Dashboard from './pages/Dashboard';
 import MyProfile from './pages/MyProfile';
+import AddProblems from './pages/AddProblems';
+import MyAddedProblems from './pages/MyAddedProblems';
 function App() {
   return (
     <div className='w-screen min-h-screen bg-blue-400'>
@@ -36,7 +38,9 @@ function App() {
 
 
             <Route element = {<Dashboard/>}>
-                  <Route path = "/dashboard/myProfile" element = {<MyProfile/>}/>
+                  <Route path = "/dashboard/myprofile" element = {<MyProfile/>}/>
+                  <Route path = "/dashboard/addproblem" element = {<AddProblems/>}/>
+                  <Route path = "/dashboard/mycreatedproblems" element = {<MyAddedProblems/>}/>
             </Route> 
 
         </Routes>
