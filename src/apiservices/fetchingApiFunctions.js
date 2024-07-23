@@ -134,3 +134,48 @@ export const addproblemTestCaseByCoder = async(bodyData,token,dispatch) => {
         }
         toast.dismiss(toastid);
 }
+
+export const CodeExecuteOnRunButton = async(bodyData,token,setverdict) => {
+    const toastid = toast.loading('running');
+    try {
+        const ob = {
+            ...bodyData,
+            token,
+        }
+        // console.log('fetch mai',ob);
+        const output = await apiConnect("POST",problemsAPI.executeProblemRun,ob);
+        // console.log('yah pai',output);
+        if(output.statusText !== "OK")
+        {
+                throw new Error("not able to execute");
+        }
+        toast.success(output.data.verdict);
+        setverdict(output.data.verdict);
+    }catch(error){
+        setverdict('wrong answer');
+        toast.error('wrong answer');
+    }
+    toast.dismiss(toastid);
+}
+export const CodeExecuteOnSubmitButton = async(bodyData,token,setverdict) => {
+    const toastid = toast.loading('submitting');
+    try {
+        const ob = {
+            ...bodyData,
+            token,
+        }
+        // console.log('fetch mai',ob);
+        const output = await apiConnect("POST",problemsAPI.executeProblemSubmit,ob);
+        // console.log('yah pai',output);
+        if(output.statusText !== "OK")
+        {
+                throw new Error("not able to execute");
+        }
+        toast.success(output.data.verdict);
+        setverdict(output.data.verdict);
+    }catch(error){
+        setverdict('wrong answer');
+        toast.error('wrong answer');
+    }
+    toast.dismiss(toastid);
+}
