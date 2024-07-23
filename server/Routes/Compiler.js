@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const {executeyourcode} = require('../Controllers/Compiler');
+const {executeyourcodeonRun,executeyourcodeonSubmit} = require('../Controllers/Compiler');
 
-router.post('/run',executeyourcode);
+router.post('/run',executeyourcodeonRun);
+router.post('/submit',executeyourcodeonSubmit);
 
 module.exports = router;
