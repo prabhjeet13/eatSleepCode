@@ -5,7 +5,8 @@ const outPath = require('./executecpp');
 const codesDirectory = path.join(__dirname,'codes'); // it will give path till compiler.js parent folder and add this folder if not added
 const Problems = require('../Models/Problems');
 const {executecpp} = require('../Controllers/executecpp');
-
+const User = require('../Models/User');
+const SolutionSubmittedByUser = require('../Models/SolutionsSubmittedByUser');
 if(!fs.existsSync(codesDirectory))
 {
     fs.mkdirSync(codesDirectory,{recursive : true});
@@ -21,14 +22,27 @@ if(!fs.existsSync(inputDirectory))
 exports.executeyourcodeonRun = async(req,res) => {
     try {
         // default lang is cpp
-        const {language = 'cpp',code,testcase_input,testcase_output,customInput,problemId} = req.body;
-        if(!language || !code || !testcase_input || !testcase_output) {
+        const {language,code,customInput,problemId} = req.body;
+        // console.log(req.body)
+        if(!language || !code || !problemId) {
             return res.status(404).json({
                 success: false,
                 message : 'Write your code', 
             });
         }
 
+        const problemDetails = await Problems.findById({_id: problemId}).populate("testCases").exec();
+
+        if(!problemDetails)
+        {
+            return res.status(400).json({
+                success: false,
+                message: 'sorry problem not found',
+            });
+        }    
+
+        const testcase_input = problemDetails.testCases[0].input;
+        const testcase_output = problemDetails.testCases[0].output;
 
        // generating file path of user code
        const jobId = v4();
@@ -53,15 +67,7 @@ exports.executeyourcodeonRun = async(req,res) => {
 
        if(customInput)
        {   
-            const problemDetails = await Problems.findById({_id: problemId});
-
-            if(!problemDetails)
-            {
-                return res.status(400).json({
-                    success: false,
-                    message: 'sorry problem not found',
-                });
-            }
+           
             const idealCode =  problemDetails.code;
 
             const idealcodejobId = v4();
@@ -88,7 +94,7 @@ exports.executeyourcodeonRun = async(req,res) => {
 
        if(verdict === "accepted")
        {
-         res.status(200).json({codercode_filepath,expected_output: testcase_output,your_output : output ,verdict : "accepted"});
+         res.status(200).json({success: true, codercode_filepath,expected_output: testcase_output,your_output : output ,verdict : verdict});
        }
     }catch(error)
     {
@@ -102,8 +108,9 @@ exports.executeyourcodeonRun = async(req,res) => {
 exports.executeyourcodeonSubmit = async(req,res) => {
     try {
         // default lang is cpp
-        const {language = 'cpp',code,problemId} = req.body;
-        
+        const {language,code,problemId} = req.body;
+        const coderId = req.user.id;
+        // console.log(req.body);
         if(!language || !code || !problemId) {
             return res.status(404).json({
                 success: false,
@@ -112,7 +119,7 @@ exports.executeyourcodeonSubmit = async(req,res) => {
         }
 
         const problemDetails = await Problems.findById({_id: problemId}).populate("testCases").exec();
-
+        // console.log(problemDetails);
         if(!problemDetails)
         {
             return res.status(400).json({
@@ -144,7 +151,39 @@ exports.executeyourcodeonSubmit = async(req,res) => {
                 res.status(500).json({codercode_filepath,input : input,expected_output: output, your_output : finalresult, verdict : "wrong answer"});
             }
         }
-        res.status(200).json({codercode_filepath,verdict : "accepted"});
+
+
+        const solutionDetails = await SolutionSubmittedByUser.create({
+                                      coderId, 
+                                      verdict : 'accepted',         
+                                      problemId,
+                                      });
+
+        const problemDetailsAfterSubmission = await Problems.findByIdAndUpdate(
+            {_id:problemId},
+            {
+                $push : {
+                  solutionsSubmittedByCoder  : solutionDetails._id,
+                }
+            },
+            {new: true}
+           );                               
+
+
+
+        const userDetails = await User.findByIdAndUpdate(
+                                        {_id:coderId},
+                                        {
+                                            $push : {
+                                                problemsSolved : problemId,
+                                            }
+                                        },
+                                        {new: true}
+                                       );
+                                        
+
+
+        res.status(200).json({success: true, codercode_filepath,verdict : 'accepted'});
     }catch(error)
     {
         return res.status(500).json({

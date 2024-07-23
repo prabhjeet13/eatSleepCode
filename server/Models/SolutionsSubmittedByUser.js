@@ -13,11 +13,11 @@ const SolutionSchema = new mongoose.Schema({
     },
     verdict : {
         type : String,
-        enum : ["Accepted","Wrong Answer"],
+        enum : ["accepted","wrong answer"],
     },
     submitted_at : {
         type: Date,
-        default: date.now,
+        default: Date.now,
     },
 })
 

@@ -54,7 +54,7 @@ exports.addTestcases = async(req,res) => {
 
         const {input,output,problemId} = req.body;
 
-        console.log(req.body);
+        // console.log(req.body);
         const coderId = req.user.id; 
         if(!input || !output || !problemId || !coderId)
         {

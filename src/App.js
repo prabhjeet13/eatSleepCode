@@ -15,6 +15,7 @@ import Dashboard from './pages/Dashboard';
 import MyProfile from './pages/MyProfile';
 import AddProblems from './pages/AddProblems';
 import MyAddedProblems from './pages/MyAddedProblems';
+import ExecutePage from './pages/ExecutePage';
 function App() {
   return (
     <div className='w-screen min-h-screen bg-blue-400'>
@@ -35,7 +36,7 @@ function App() {
              <Route path = "/problems" element = {<Problems />} />
              <Route path = "/problems/:tag" element = {<ProblemsByTagPage/>} />
              <Route path = "/problems/problem/:problemId" element = {<ProblemPage/>} />
-
+             <Route path = "/problems/problem/execute/:problemId" element = {<ExecutePage/>} />
 
             <Route element = {<Dashboard/>}>
                   <Route path = "/dashboard/myprofile" element = {<MyProfile/>}/>
