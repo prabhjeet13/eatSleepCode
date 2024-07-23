@@ -23,7 +23,7 @@ exports.executeyourcodeonRun = async(req,res) => {
     try {
         // default lang is cpp
         const {language,code,customInput,problemId} = req.body;
-        // console.log(req.body)
+        // console.log(req.body);
         if(!language || !code || !problemId) {
             return res.status(404).json({
                 success: false,
@@ -58,11 +58,12 @@ exports.executeyourcodeonRun = async(req,res) => {
 
         const output = await executecpp(codercode_filepath,default_testcase_filepath);
         var verdict = "wrong answer";
+        console.log(output,testcase_output,problemDetails.testCases[0]._id);
         if(output === testcase_output) {
             verdict = "accepted";
         }  
         else {
-            res.status(200).json({codercode_filepath,output,verdict : "wrong answer"});
+            res.status(500).json({success : false, codercode_filepath,output,verdict : "wrong answer"});
         }
 
        if(customInput)
