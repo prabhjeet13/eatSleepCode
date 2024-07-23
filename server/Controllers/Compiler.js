@@ -14,7 +14,7 @@ if(!fs.existsSync(codesDirectory))
 exports.executeyourcode = async(req,res) => {
     try {
         // default lang is cpp
-        const {language = 'cpp',code} = req.body;
+        const {language = 'cpp',code,testcases,customInput} = req.body;
 
         if(!language || !code) {
             return res.status(404).json({
