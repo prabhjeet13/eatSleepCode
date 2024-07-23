@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 4000;
 const cookiePaser = require('cookie-parser');
 app.use(express.json());
 app.use(cookiePaser());
-
+app.use(express.urlencoded({ extended: true }));
 
 const cors = require('cors');
 app.use(
@@ -24,8 +24,13 @@ app.use(
 //routes
 const authRoutes = require('./Routes/Auth');
 const problemsRoutes = require('./Routes/Problems');
+
+const compilerRoutes = require('./Routes/Compiler');
+
 app.use("/api/v1/auth",authRoutes);
 app.use("/api/v1/problems",problemsRoutes);
+app.use("/api/v1/compiler",compilerRoutes);
+
 
 //database
 const {dbConnect} = require('./config/database');
