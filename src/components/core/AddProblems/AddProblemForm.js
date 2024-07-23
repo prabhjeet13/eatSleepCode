@@ -49,7 +49,7 @@ const AddProblemForm = () => {
         const bodyData = {
             ...formData,
             tag : radioboxvalue,
-            constraints : JSON.stringify(problemconstraints),
+            constraints : problemconstraints,
         } 
 
        addproblemByCoder(bodyData,token,dispatch);
