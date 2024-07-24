@@ -18,7 +18,7 @@ import MyAddedProblems from './pages/MyAddedProblems';
 import ExecutePage from './pages/ExecutePage';
 function App() {
   return (
-    <div className='w-screen min-h-screen bg-blue-400'>
+    <div className='w-screen min-h-screen bg-[#f5f5f5]'>
         {/* navbar component take it from components/common */}
         <Navbar/>
 

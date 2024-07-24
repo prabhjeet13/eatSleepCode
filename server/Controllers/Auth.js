@@ -174,7 +174,8 @@ exports.signIn = async(req,res) => {
             });
         }
 
-        const existUser = await User.findOne({emailAddress : emailAddress});
+        const existUser = await User.findOne({emailAddress : emailAddress})
+                                .populate("problemsCreated").exec();
 
         if(!existUser) {
             return res.status(400).json({

@@ -36,12 +36,12 @@ const LoginPage = () => {
           <form className='flex flex-col gap-5 font-semibold' onSubmit={onSubmitHandler}>
               <div className='flex flex-col gap-1'>
                   <label htmlFor='emailAddress'>emailAddress</label>
-                  <input onChange = {textboxvaluechange} value = {formData.emailAddress} type= 'text' name = 'emailAddress' id = 'emailAddress' placeholder='emailAddress' className='bg-gray-500 py-2 rounded-md px-3 text-white' required/>
+                  <input onChange = {textboxvaluechange} value = {formData.emailAddress} type= 'text' name = 'emailAddress' id = 'emailAddress' placeholder='emailAddress' className='bg-white py-2 rounded-md px-3 text-black border-2 border-black' required/>
               </div>
 
               <div className='flex flex-col gap-1 relative'>
                   <label htmlFor='password'>password</label>
-                  <input onChange = {textboxvaluechange} value = {formData.password} type= {`${showpassword ? "text" : "password"}`} name = 'password' id = 'password' placeholder='password' className='bg-gray-500 py-2 rounded-md px-3 text-white' required/>
+                  <input onChange = {textboxvaluechange} value = {formData.password} type= {`${showpassword ? "text" : "password"}`} name = 'password' id = 'password' placeholder='password' className='bg-white py-2 rounded-md px-3 text-black border-2 border-black' required/>
                   <FaEye onClick={() => {setshowpassword(false)} } className={`${showpassword ? "visible" : "invisible"} absolute text-lg top-10 right-2`}  />
                   <FaEyeSlash onClick={() => {setshowpassword(true)}} className= {`${showpassword ? "invisible" : "visible"} absolute text-lg top-10 right-2`} />
               </div>

@@ -3,10 +3,10 @@ import { Outlet ,Link } from 'react-router-dom'
 const Dashboard = () => {
   return (
     
-    <div className='w-[1400px] border-2 border-black ml-2 mt-2 flex flex-row gap-2'>
+    <div className='w-[1400px] ml-2 mt-2 flex flex-row gap-2'>
 
             {/*sidebar*/}
-            <div className = 'mt-2 ml-2 w-[12%] p-2 border-2 min-h-screen bg-red-800 flex flex-col gap-5'>
+            <div className = 'mt-2 ml-2 w-[12%] p-2 border-2 min-h-screen bg-black flex flex-col gap-5'>
 
                   <div className='text-white font-semibold font-mono text-lg'>
                       <ul className='flex flex-col gap-5'>

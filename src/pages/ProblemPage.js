@@ -73,7 +73,7 @@ const ProblemPage = () => {
                 { 
                   token !== null && 
                     ( <Link to = {`/problems/problem/execute/${problemData._id}`}>
-                      <div className='absolute -top-1 right-96 font-bold text-black bg-yellow-400 p-2 border-2 rounded-md'>
+                      <div className='absolute -top-1 right-96 font-bold text-white bg-black shadow-md shadow-black duration-200 transition-all hover:scale-90 p-2 border-2 rounded-md'>
                         solve problem
                      </div>
                      </Link>

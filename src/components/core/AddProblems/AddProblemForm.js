@@ -1,9 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 import { addproblemByCoder } from '../../../apiservices/fetchingApiFunctions';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../../../slices/userSlice';
+import {toast} from 'react-hot-toast';
 const AddProblemForm = () => {
   const {step} = useSelector((state) => state.problem);
   const {token} = useSelector((state) => state.auth);
@@ -16,6 +15,11 @@ const AddProblemForm = () => {
   const [problemconstraints,setproblemconstraints] = useState([]);
   const [pc,setpc] = useState(""); 
   const add = (constraint) => {
+ 
+    if(!constraint) {
+        toast.error('please add constraint');
+        return;
+    }
     
     if(problemconstraints.includes(constraint))
     {
@@ -25,6 +29,8 @@ const AddProblemForm = () => {
     
     problemconstraints.push(constraint);
     setproblemconstraints(problemconstraints);
+    toast.success('constraint added');
+    setpc('');
     console.log(problemconstraints);
   }
 
@@ -64,11 +70,11 @@ const AddProblemForm = () => {
             <form onSubmit={submitHandler} className='scrollbar-track-gray-800 scrollbar-thin scrollbar-thumb-black gap-3 flex flex-col'>
                     <div className='flex flex-col gap-2'>
                         <label className='font-mono text-lg font-bold'>Problem Name</label>
-                        <input value = {formData.problemName} name = 'problemName' id = 'problemName' className = 'p-2 bg-gray-700 text-white font-mono text-lg font-semibold' type = 'text' onChange={textboxchange}/>
+                        <input value = {formData.problemName} name = 'problemName' id = 'problemName' className = 'rounded-md p-2 border-2 border-black text-black font-mono text-lg font-semibold' type = 'text' onChange={textboxchange}/>
                     </div>
                     <div className='flex flex-col gap-2 font-bold'>
                         <label className='font-mono text-lg'>Problem Statement</label>
-                        <input value = {formData.problemStatement} name = 'problemStatement' id = 'problemStatement' type = 'text' className = ' p-2 bg-gray-700 text-white  text-lg font-semibold' onChange={textboxchange}/>
+                        <input value = {formData.problemStatement} name = 'problemStatement' id = 'problemStatement' type = 'text' className = 'rounded-md p-2 border-2 border-black text-black  text-lg font-semibold' onChange={textboxchange}/>
                     </div>
                     <div className='flex flex-col gap-2 font-bold'>
                         <label className='font-mono text-lg'> Tag </label>
@@ -80,15 +86,15 @@ const AddProblemForm = () => {
                     </div>
                     <div className='flex flex-col gap-3 font-bold'>
                         <label className='font-mono text-lg'>Constraints</label>
-                        <input onChange={(e) => setpc(e.target.value)}  id = "pc" name = "pc" value = {`${pc}`} type = 'text' className = 'p-2 bg-gray-700 text-white  text-lg font-semibold'/>
-                        <p onClick={() => add(pc)} className='border-2 mt-2 bg-gray-800 p-2 text-white w-[50%] cursor-pointer'> add constraint ? </p>
+                        <input onChange={(e) => setpc(e.target.value)}  id = "pc" name = "pc" value = {`${pc}`} type = 'text' className = 'rounded-md p-2 border-2 border-black text-black  text-lg font-semibold'/>
+                        <p onClick={() => add(pc)} className='rounded-md border-2 mt-2 bg-black p-2 text-white duration-200 transition-all hover:scale-90 w-[50%] cursor-pointer'> add constraint ? </p>
                     </div>
                     <div className='flex flex-col gap-2 font-bold'>
                         <label className='font-mono text-lg'>Correct Code</label>
-                        <textarea value = {formData.code} id = 'code' name = 'code' type = 'text' rows={10} cols={5} className = 'p-2 bg-gray-700 text-white  text-lg font-semibold' onChange={textboxchange}/>
+                        <textarea value = {formData.code} id = 'code' name = 'code' type = 'text' rows={10} cols={5} className = 'rounded-md p-2 border-2 border-black text-black   text-lg font-semibold' onChange={textboxchange}/>
                     </div>
 
-                    <button type='Submit' className='font-semibold font-mono p-2 border-2 bg-yellow-400 mt-2 rounded-md'>Save a Problem</button>
+                    <button type='Submit' className='font-semibold font-mono p-2 border-2 bg-yellow-400 mt-2 rounded-md duration-200 transition-all hover:scale-90 shadow-md shadow-black'>Save a Problem</button>
             </form>
         </div>
 

@@ -64,7 +64,7 @@ const ExecutePage = () => {
 
     <div className='w-11/12 max-w-[1260px] mx-auto flex flex-col gap-5 justify-between items-center mt-5'>
             <Link to = {`/problems/problem/${problemId}`}>
-                <div className='border-2 bg-red-600 shadow-md shadow-black text-black p-2 rounded-md transition-all duration-200 hover:scale-90 cursor-pointer font-bold text-xl'> View Problem </div>
+                <div className='border-2 bg-black shadow-md shadow-black text-white p-2 rounded-md transition-all duration-200 hover:scale-90 cursor-pointer font-bold text-xl'> View Problem </div>
             </Link>
 
             <div className='flex flex-row gap-5 mt-2'>
@@ -78,16 +78,16 @@ const ExecutePage = () => {
                         <button onClick={submitHandler} type = 'button'  className='absolute -top-20 right-0 border-2 bg-green-800 text-white p-2 rounded-md h-[15%] px-3 mt-10 transition-all duration-200 shadow-md shadow-black hover:scale-90'>Submit</button>
                         <div className='flex flex-col gap-2 mt-5'>
                             <label>Code Editor</label>
-                            <textarea onChange = {textboxChange} name = 'code' id = 'code' value = {CoderExecuteData.code} rows={13} cols={50} placeholder='write your code' className='text-lg font-black p-2 border-2'></textarea>
+                            <textarea onChange = {textboxChange} name = 'code' id = 'code' value = {CoderExecuteData.code} rows={13} cols={50} placeholder='write your code' className=' border-black text-black rounded-md text-lg font-black p-2 border-2'></textarea>
                         </div>
                         <div className='flex flex-col gap-3 mt-5'>
                             <div className='flex flex-col gap-2'>
                                 <label>Input</label>
-                                <textarea onChange = {textboxChange} name = 'customInput' id = 'customInput' value = {CoderExecuteData.customInput} rows={5} cols={50} placeholder='write your custom input' className='text-lg font-black p-2 border-2'></textarea>
+                                <textarea onChange = {textboxChange} name = 'customInput' id = 'customInput' value = {CoderExecuteData.customInput} rows={5} cols={50} placeholder='write your custom input' className=' border-black text-black rounded-md text-lg font-black p-2 border-2'></textarea>
                             </div>
                             <div className='flex flex-col gap-2'>
                                 <label>Output</label>
-                                <textarea name = 'output' id = 'output' value = {`${verdict}`} rows= {5} cols={50} placeholder='output will display' className='text-lg font-black p-2 border-2' readOnly></textarea>
+                                <textarea name = 'output' id = 'output' value = {`${verdict}`} rows= {5} cols={50} placeholder='output will display' className='text-lg font-black p-2 border-2 border-black text-black rounded-md' readOnly></textarea>
                             </div>
                         </div>
                     </form>

@@ -1,6 +1,6 @@
 
 import {apiConnect} from '../apiservices/apiConnect';
-import {problemsAPI} from '../apiservices/allAPIs';
+import {problemsAPI, userAPI} from '../apiservices/allAPIs';
 import {authAPI} from '../apiservices/allAPIs';
 import { setToken } from '../slices/authSlice';
 import { setUser } from '../slices/userSlice';
@@ -126,6 +126,7 @@ export const addproblemTestCaseByCoder = async(bodyData,token,dispatch) => {
                 throw new Error('add problem kai Test Cases mai issue');
             }
             console.log(output.data);
+            localStorage.setItem("user",JSON.stringify(output.data.userDetails));
             dispatch(setUser(output.data.userDetails));
             dispatch(setProblem(output.data.problemDetails));
             toast.success('testcase added');

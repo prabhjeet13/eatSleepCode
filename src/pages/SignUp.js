@@ -60,13 +60,13 @@ const SignUp = () => {
                           <label htmlFor='firstName'>
                               firstName
                           </label>
-                          <input onChange = {textboxvaluechange} value = {formData.firstName} type = 'text' id = 'firstName' name='firstName' placeholder='firstName' className='bg-gray-500 py-2 rounded-md px-3 text-white' required/>
+                          <input onChange = {textboxvaluechange} value = {formData.firstName} type = 'text' id = 'firstName' name='firstName' placeholder='firstName' className='py-2 rounded-md px-3 text-black bg-white border-2 border-black' required/>
                       </div>
                       <div className='flex flex-col gap-1'>
                           <label htmlFor='lastName'>
                               lastName
                           </label>
-                          <input onChange = {textboxvaluechange} value = {formData.lastName} type = 'text' id = 'lastName' name='lastName' placeholder='lastName' className='bg-gray-500 py-2 rounded-md px-3 text-white' required/>
+                          <input onChange = {textboxvaluechange} value = {formData.lastName} type = 'text' id = 'lastName' name='lastName' placeholder='lastName' className='py-2 rounded-md px-3 text-white bg-white border-2 border-black' required/>
                       </div>
                 </div>
 
@@ -74,19 +74,19 @@ const SignUp = () => {
                   <label htmlFor='emailAddress'> 
                       emailAddress
                   </label>
-                  <input onChange = {textboxvaluechange} value = {formData.emailAddress} type = 'text' id = 'emailAddress' name = 'emailAddress' placeholder='emailAddress' className='bg-gray-500 py-2 rounded-md px-3 text-white' required/>
+                  <input onChange = {textboxvaluechange} value = {formData.emailAddress} type = 'text' id = 'emailAddress' name = 'emailAddress' placeholder='emailAddress' className='border-2 border-black py-2 rounded-md px-3 text-black' required/>
                 </div>
 
               <div className='flex flex-row gap-2'>
                 <div className='flex flex-col gap-1 relative'>
                           <label htmlFor='password'> password </label>
-                          <input onChange = {textboxvaluechange} value = {formData.password} type = {`${showpassword ? "text" : "password" }`} id = 'password' name='password' placeholder='password' className='bg-gray-500 py-2 rounded-md px-3 text-white' required/>
+                          <input onChange = {textboxvaluechange} value = {formData.password} type = {`${showpassword ? "text" : "password" }`} id = 'password' name='password' placeholder='password' className='border-2 border-black py-2 rounded-md px-3 text-black' required/>
                           <FaEye onClick={() => {setshowpassword(false)} } className={`${showpassword ? "visible" : "invisible"} absolute text-lg top-11 right-2`}  />
                           <FaEyeSlash onClick={() => {setshowpassword(true)}} className= {`${showpassword ? "invisible" : "visible"} absolute text-lg top-11 right-2`} />
                 </div>
                 <div className='flex flex-col gap-1 relative'>
-                <label htmlFor='confirmPassword'> confirmpassword </label>
-                          <input onChange = {textboxvaluechange} value = {formData.confirmPassword} type = {`${showconfirmpassword ? "text" : "password" }`} id = 'confirmPassword' name='confirmPassword' placeholder='confirmPassword' className='bg-gray-500 py-2 rounded-md px-3 text-white' required/>
+                <label htmlFor='confirmPassword'> confirm password </label>
+                          <input onChange = {textboxvaluechange} value = {formData.confirmPassword} type = {`${showconfirmpassword ? "text" : "password" }`} id = 'confirmPassword' name='confirmPassword' placeholder='confirmPassword' className='border-2 border-black py-2 rounded-md px-3 text-black' required/>
                           <FaEye onClick={() => {setshowconfirmpassword(false)} } className={`${showconfirmpassword ? "visible" : "invisible"} absolute text-lg top-11 right-2`}  />
                           <FaEyeSlash onClick={() => {setshowconfirmpassword(true)}} className= {`${showconfirmpassword ? "invisible" : "visible"} absolute text-lg top-11 right-2`} />
                 </div>

@@ -8,6 +8,10 @@ export const problemsAPI = {
     executeProblemSubmit : "http://localhost:4000/api/v1/compiler/submit"
 }
 
+export const userAPI = {
+    userDet : "http://localhost:4000/api/v1/user/details",
+}
+
 export const authAPI = {
     sendotpapi : "http://localhost:4000/api/v1/auth/sendotp",
     signupapi : "http://localhost:4000/api/v1/auth/signup",
