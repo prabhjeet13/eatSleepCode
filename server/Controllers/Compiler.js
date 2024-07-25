@@ -63,7 +63,7 @@ exports.executeyourcodeonRun = async(req,res) => {
             verdict = "accepted";
         }  
         else {
-            res.status(500).json({success : false, codercode_filepath,output,verdict : "wrong answer"});
+            return res.status(500).json({success : false, codercode_filepath,output,verdict : "wrong answer"});
         }
 
        if(customInput)
@@ -86,16 +86,16 @@ exports.executeyourcodeonRun = async(req,res) => {
 
             if(verdict === "accepted" && idealoutput === coderoutput)
             {
-                res.status(200).json({codercode_filepath,expected_output : idealoutput,your_output: coderoutput,verdict : "accepted"});
+               return res.status(200).json({codercode_filepath,expected_output : idealoutput,your_output: coderoutput,verdict : "accepted"});
             }else {
-                res.status(500).json({codercode_filepath,expected_output : idealoutput,your_output: coderoutput,verdict : "wrong answer"});
+                return res.status(500).json({codercode_filepath,expected_output : idealoutput,your_output: coderoutput,verdict : "wrong answer"});
             }
        } 
 
 
        if(verdict === "accepted")
        {
-         res.status(200).json({success: true, codercode_filepath,expected_output: testcase_output,your_output : output ,verdict : verdict});
+         return res.status(200).json({success: true, codercode_filepath,expected_output: testcase_output,your_output : output ,verdict : verdict});
        }
     }catch(error)
     {
@@ -149,7 +149,7 @@ exports.executeyourcodeonSubmit = async(req,res) => {
 
             if(finalresult !== output)
             {
-                res.status(500).json({codercode_filepath,input : input,expected_output: output, your_output : finalresult, verdict : "wrong answer"});
+                return res.status(500).json({codercode_filepath,input : input,expected_output: output, your_output : finalresult, verdict : "wrong answer"});
             }
         }
 

@@ -136,7 +136,7 @@ export const addproblemTestCaseByCoder = async(bodyData,token,dispatch) => {
         toast.dismiss(toastid);
 }
 
-export const CodeExecuteOnRunButton = async(bodyData,token,setverdict) => {
+export const CodeExecuteOnRunButton = async(bodyData,token,setverdict,setrunbtndisable) => {
     const toastid = toast.loading('running');
     try {
         const ob = {
@@ -152,13 +152,15 @@ export const CodeExecuteOnRunButton = async(bodyData,token,setverdict) => {
         }
         toast.success(output.data.verdict);
         setverdict(output.data.verdict);
+        setrunbtndisable(true);
     }catch(error){
         setverdict('wrong answer');
+        setrunbtndisable(true);
         toast.error('wrong answer');
     }
     toast.dismiss(toastid);
 }
-export const CodeExecuteOnSubmitButton = async(bodyData,token,setverdict) => {
+export const CodeExecuteOnSubmitButton = async(bodyData,token,setverdict,setsubmitbtndisable) => {
     const toastid = toast.loading('submitting');
     try {
         const ob = {
@@ -174,8 +176,10 @@ export const CodeExecuteOnSubmitButton = async(bodyData,token,setverdict) => {
         }
         toast.success(output.data.verdict);
         setverdict(output.data.verdict);
+        setsubmitbtndisable(true);
     }catch(error){
         setverdict('wrong answer');
+        setsubmitbtndisable(true);
         toast.error('wrong answer');
     }
     toast.dismiss(toastid);

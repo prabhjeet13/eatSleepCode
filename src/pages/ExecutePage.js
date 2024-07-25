@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
-import { apiConnect } from '../apiservices/apiConnect';
-import {HiChevronDown} from 'react-icons/hi';
 import { CodeExecuteOnRunButton,CodeExecuteOnSubmitButton } from '../apiservices/fetchingApiFunctions';
 const ExecutePage = () => {
     
     const {problemId} = useParams(); 
+    const [runbtnDisable,setrunbtndisable] = useState(true);
+    const [submitbtnDisable,setsubmitbtndisable] = useState(true);
     const [verdict,setverdict] = useState("output will display here");
     const {token} = useSelector((state) => state.auth);
     const [CoderExecuteData,setCoderExecuteData] = useState({
@@ -32,8 +32,11 @@ const ExecutePage = () => {
                 ...CoderExecuteData,
                 problemId,
             }
+            
             // console.log('ttttaaaa');
-            CodeExecuteOnRunButton(bodyData,token,setverdict);
+            setrunbtndisable(false);
+            CodeExecuteOnRunButton(bodyData,token,setverdict,setrunbtndisable);
+            // setrunbtndisable(true);
             // console.log(output);
             // setverdict(output.verdict);
 
@@ -49,7 +52,8 @@ const ExecutePage = () => {
                 problemId,
             }
             // console.log('ttttaaaa');
-            CodeExecuteOnSubmitButton(bodyData,token,setverdict);
+            setsubmitbtndisable(false);
+            CodeExecuteOnSubmitButton(bodyData,token,setverdict,setsubmitbtndisable);
             // console.log(output);
             // setverdict(output.verdict);
 
@@ -74,8 +78,8 @@ const ExecutePage = () => {
                                <option className='text-3xl'>cpp</option> 
                                <option className='text-3xl'>java</option>  
                          </select>   
-                        <button onClick={runHandler} type = 'button'   className='absolute -top-20 right-32 border-2 bg-red-600 text-white p-2 rounded-md h-[15%] px-3 mt-10 transition-all duration-200 shadow-md shadow-black hover:scale-90'>Run</button>
-                        <button onClick={submitHandler} type = 'button'  className='absolute -top-20 right-0 border-2 bg-green-800 text-white p-2 rounded-md h-[15%] px-3 mt-10 transition-all duration-200 shadow-md shadow-black hover:scale-90'>Submit</button>
+                        <button onClick={runHandler} type = 'button'  id = 'run' className={`absolute -top-20 right-32 border-2 bg-red-600 text-white p-2 rounded-md h-[15%] px-3 mt-10 transition-all duration-200 shadow-md shadow-black hover:scale-90 ${runbtnDisable === true ? "visible" : "invisible"}`}>Run</button>
+                        <button onClick={submitHandler} type = 'button' id = 'submit' className={`absolute -top-20 right-0 border-2 bg-green-800 text-white p-2 rounded-md h-[15%] px-3 mt-10 transition-all duration-200 shadow-md shadow-black hover:scale-90 ${submitbtnDisable === true ? "visible" : "invisible"}`}>Submit</button>
                         <div className='flex flex-col gap-2 mt-5'>
                             <label>Code Editor</label>
                             <textarea onChange = {textboxChange} name = 'code' id = 'code' value = {CoderExecuteData.code} rows={13} cols={50} placeholder='write your code' className=' border-black text-black rounded-md text-lg font-black p-2 border-2'></textarea>
