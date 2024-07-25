@@ -67,7 +67,7 @@ const AddProblemForm = () => {
         <p className='font-bold font-mono text-3xl uppercase'>Add Problem Details</p>
         
         <div>
-            <form onSubmit={submitHandler} className='scrollbar-track-gray-800 scrollbar-thin scrollbar-thumb-black gap-3 flex flex-col'>
+            <form onSubmit={submitHandler} className=' gap-3 flex flex-col'>
                     <div className='flex flex-col gap-2'>
                         <label className='font-mono text-lg font-bold'>Problem Name</label>
                         <input value = {formData.problemName} name = 'problemName' id = 'problemName' className = 'rounded-md p-2 border-2 border-black text-black font-mono text-lg font-semibold' type = 'text' onChange={textboxchange}/>

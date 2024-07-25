@@ -20,13 +20,13 @@ const MyProfile = () => {
           {/* name vagera */}
           { 
             user && (
-              <div className='mr-[900px] mt-5 flex-col flex gap-3 ml-3'>
-                      <div className='flex flex-row items-center gap-3 text-black font-bold text-xl'>
-                            <img src = {user.image} width= {60} height = {60} className='rounded-full'/>
+              <div className='mt-5 flex-col flex gap-4'>
+                      <div className='md:flex md:flex-row items-center gap-5  text-black font-bold text-xl flex flex-col'>
+                            <img src = {user.image} width= {60} height = {60} className='rounded-full shadow-md shadow-black p-1 duration-200 transition-all hover:scale-90'/>
                             <p>{user.firstName}</p>
                             <p>{user.lastName}</p>
                       </div>
-                      <div className='text-black font-mono text-xl font-bold'>
+                      <div className='text-black font-mono md:text-xl font-bold flex flex-wrap w-11/12'>
                               <p>{user.emailAddress}</p>
                       </div>
               </div>

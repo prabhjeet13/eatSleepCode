@@ -18,10 +18,10 @@ const MyAddedProblems = () => {
 
 
   return (
-    <div className='w-[80%] flex flex-col items-center mt-5 flex-wrap'>
+    <div className='md:w-[70%] w-[50%] flex flex-col items-center mt-5 flex-wrap'>
         {
             user.problemsCreated.length > 0 && (
-              <Table className = 'mt-5 border-2 border-black flex flex-col  ml-10'>
+              <Table className = 'mt-5 border-2 border-black flex flex-col ml-10'>
                       <Thead>
                       <Tr className = 'p-2 text-xl text-black border-2 border-black flex items-center justify-evenly'>
                           <Th>Problem Name</Th>
