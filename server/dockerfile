@@ -1,5 +1,6 @@
 FROM NODE:18-alpine
 WORKDIR /app
+RUN apk add --update redis
 COPY . .
 RUN npm i
 RUN npm i brcypt
