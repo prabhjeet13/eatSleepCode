@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const {auth,isCoder} = require('../Middlewares/Auth');
-const {executeyourcodeonRun,executeyourcodeonSubmit} = require('../Controllers/Compiler');
+const {auth} = require('../Middlewares/Auth');
+const {executeyourcodeonRun,executeyourcodeonSubmit,executeyourcodeIDE} = require('../Controllers/Compiler');
 
-router.post('/run',auth,isCoder,executeyourcodeonRun);
-router.post('/submit',auth,isCoder,executeyourcodeonSubmit);
+router.post('/run',auth,executeyourcodeonRun);
+router.post('/submit',auth,executeyourcodeonSubmit);
+
+router.post('/iderun',executeyourcodeIDE);
 
 module.exports = router;

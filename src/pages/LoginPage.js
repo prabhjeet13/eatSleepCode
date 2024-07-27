@@ -29,9 +29,9 @@ const LoginPage = () => {
     }
 
   return (
-    <div className='mx-auto max-w-[1260px] md:flex md:flex-row md:mt-5 justify-evenly items-center md:gap-3 flex flex-col-reverse gap-40 mt-36 '>
+    <div className='mx-auto max-w-[1260px] md:flex md:flex-row md:mt-5 justify-evenly items-center md:gap-3 flex flex-col-reverse sm:gap-52 sm:mt-36 mt-10'>
   
-      <div className='w-[40%] flex flex-col gap-2'>
+      <div className='md:w-[40%] flex flex-col gap-2 w-11/12 max-500:mb-56'>
           <p className='text-xl font-semibold font-mono uppercase'> welcome again to eatsleepcode !!!</p>
           <form className='flex flex-col gap-5 font-semibold' onSubmit={onSubmitHandler}>
               <div className='flex flex-col gap-1'>
@@ -50,7 +50,7 @@ const LoginPage = () => {
         
       </div>
       {/* image section */}
-      <div className='w-[50%] relative'>
+      <div className='md:w-[40%] relative max-500:invisible sm:w-[50%]'>
           <img src = {imagebg} className='absolute -right-3 -top-32'></img>
           <img src={imagesignup} className='absolute right-1 -top-28'></img>
       </div>

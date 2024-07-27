@@ -1,9 +1,11 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet ,Link, useNavigate } from 'react-router-dom'
 import { setToken } from '../slices/authSlice';
 import { setUser } from '../slices/userSlice';
 const Dashboard = () => {
+
+  const {user} = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,12 +31,21 @@ const Dashboard = () => {
                         <Link to = "/dashboard/myprofile">
                         <li className='cursor-pointer border-2 p-2'>MyProfile</li>
                         </Link>
-                        <Link to = "/dashboard/addproblem">
-                        <li className='cursor-pointer border-2 p-2'>Add Problem</li>
-                        </Link>
-                        <Link to = "/dashboard/mycreatedproblems">
-                        <li className='cursor-pointer border-2 p-2'>Created Problems</li>
-                        </Link>
+                        {
+                            user.accountType === "Admin" && (
+                              <Link to = "/dashboard/addproblem">
+                                <li className='cursor-pointer border-2 p-2'>Add Problem</li>
+                              </Link>
+                              )
+                        }
+                        
+                        {
+                          user.accountType === "Admin" && (
+                                <Link to = "/dashboard/mycreatedproblems">
+                                    <li className='cursor-pointer border-2 p-2'>Created Problems</li>
+                                </Link>
+                          )
+                        }
                       </ul>
                   </div>
 

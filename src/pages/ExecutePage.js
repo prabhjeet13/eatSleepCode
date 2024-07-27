@@ -73,13 +73,12 @@ const ExecutePage = () => {
 
             <div className='flex flex-row gap-5 mt-2'>
                 {/* compiler part */}
-                    <form  className='relative flex flex-row gap-10 text-black font-mono font-semibold text-3xl'>
+                    <form  className='min-1100:relative min-1100:flex min-1100:flex-row  text-black font-mono font-semibold text-3xl flex flex-col mx-auto w-[60%] min-1100:w-full gap-10 mb-2'>
                          <select name = 'language' id = 'language' className='absolute -top-10 font-mono font-semibold px-10 py-1 cursor-pointer' onChange={textboxChange}>
                                <option className='text-3xl'>cpp</option> 
-                               <option className='text-3xl'>java</option>  
                          </select>   
-                        <button onClick={runHandler} type = 'button'  id = 'run' className={`absolute -top-20 right-32 border-2 bg-red-600 text-white p-2 rounded-md h-[15%] px-3 mt-10 transition-all duration-200 shadow-md shadow-black hover:scale-90 ${runbtnDisable === true ? "visible" : "invisible"}`}>Run</button>
-                        <button onClick={submitHandler} type = 'button' id = 'submit' className={`absolute -top-20 right-0 border-2 bg-green-800 text-white p-2 rounded-md h-[15%] px-3 mt-10 transition-all duration-200 shadow-md shadow-black hover:scale-90 ${submitbtnDisable === true ? "visible" : "invisible"}`}>Submit</button>
+                        <button onClick={runHandler} type = 'button'  id = 'run' className={`min-1100:absolute min-1100:-top-20 min-1100:right-32 border-2 bg-red-600 text-white p-2 rounded-md h-[15%] px-3 mt-10 transition-all duration-200 shadow-md shadow-black hover:scale-90 ${runbtnDisable === true ? "visible" : "invisible"}`}>Run</button>
+                        <button onClick={submitHandler} type = 'button' id = 'submit' className={`min-1100:absolute min-1100:-top-20 min-1100:right-0 border-2 bg-green-800 text-white p-2 rounded-md h-[15%] px-3 mt-10 transition-all duration-200 shadow-md shadow-black hover:scale-90 ${submitbtnDisable === true ? "visible" : "invisible"}`}>Submit</button>
                         <div className='flex flex-col gap-2 mt-5'>
                             <label>Code Editor</label>
                             <textarea onChange = {textboxChange} name = 'code' id = 'code' value = {CoderExecuteData.code} rows={13} cols={50} placeholder='write your code' className=' border-black text-black rounded-md text-lg font-black p-2 border-2'></textarea>

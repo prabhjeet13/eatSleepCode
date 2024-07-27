@@ -5,7 +5,8 @@ export const problemsAPI = {
     addTestCase: "http://localhost:4000/api/v1/problems/addtestcases",
     getProblemById : "http://localhost:4000/api/v1/problems/getProblemById",
     executeProblemRun : "http://localhost:4000/api/v1/compiler/run",
-    executeProblemSubmit : "http://localhost:4000/api/v1/compiler/submit"
+    executeProblemSubmit : "http://localhost:4000/api/v1/compiler/submit",
+    executeProblemIDE : "http://localhost:4000/api/v1/compiler/iderun",
 }
 
 export const userAPI = {

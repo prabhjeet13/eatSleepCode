@@ -39,7 +39,7 @@ const Problems = () => {
                     Difficulty 
                     <HiChevronDown />
                     
-                    <div className='invisible absolute top-14 text-xl flex flex-col border-2 border-black gap-2  bg-white w-full font-bold group-hover:visible transition-all duration-200'>
+                    <div className='invisible absolute top-14 text-xl flex flex-col border-2 border-black gap-2  bg-white w-full font-bold group-hover:visible transition-all duration-500'>
                         <Link to = "/problems/easy">
                           <div>easy</div>
                         </Link>

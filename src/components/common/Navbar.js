@@ -29,17 +29,17 @@ const Navbar = () => {
        </Link>
 
        <div>
-           <ul>
+           <ul className='flex flex-row gap-5'>
                {/* <Link to = '/' >
                   <li className='text-lg font-bold font-mono'>Home</li>
                </Link> */}
                {/* <Link to = '/about'>
                   <li>About-us</li>
-               </Link>
+               </Link>*/}
 
-               <Link to='/contact'>
-                  <li>Contact-us</li>
-               </Link> */}
+               <Link to='/ide'>
+                  <li className='text-white bg-black shadow-md shadow-black px-5 py-2 duration-200 transition-all hover:scale-90 text-lg font-bold font-mono'>IDE</li>
+               </Link> 
 
                <Link to = '/problems'>
                     <li className='text-white bg-black shadow-md shadow-black p-2 duration-200 transition-all hover:scale-90 text-lg font-bold font-mono'>Problems</li>
