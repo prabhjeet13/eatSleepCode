@@ -8,6 +8,6 @@ export const apiConnect = (method,url,bodydata,headers) => {
         url : `${url}`,
         data : bodydata ? bodydata : null,
         headers : headers ? headers : null,
-        credentials: "include",
+        withCredentials: true,
     })
 } 

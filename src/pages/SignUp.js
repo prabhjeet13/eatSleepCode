@@ -66,7 +66,7 @@ const SignUp = () => {
                           <label htmlFor='lastName'>
                               lastName
                           </label>
-                          <input onChange = {textboxvaluechange} value = {formData.lastName} type = 'text' id = 'lastName' name='lastName' placeholder='lastName' className='py-2 rounded-md px-1 text-white bg-white border-2 border-black' required/>
+                          <input onChange = {textboxvaluechange} value = {formData.lastName} type = 'text' id = 'lastName' name='lastName' placeholder='lastName' className='py-2 rounded-md px-1 text-black bg-white border-2 border-black' required/>
                       </div>
                 </div>
 
