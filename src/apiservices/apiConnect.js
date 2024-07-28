@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const axiosInstance = axios.create({});
+export const axiosInstance = axios.create({withCredentials: true});
 
 export const apiConnect = (method,url,bodydata,headers) => {
     return axiosInstance({
@@ -8,6 +8,5 @@ export const apiConnect = (method,url,bodydata,headers) => {
         url : `${url}`,
         data : bodydata ? bodydata : null,
         headers : headers ? headers : null,
-        withCredentials: true,
     })
 } 
