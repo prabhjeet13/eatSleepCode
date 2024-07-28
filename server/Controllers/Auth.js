@@ -5,7 +5,6 @@ const User = require("../Models/User");
 const otp_generator = require("otp-generator");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { TbRuler3 } = require("react-icons/tb");
 require('dotenv').config();
 
 exports.sendOtp = async(req,res) => {
