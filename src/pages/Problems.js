@@ -14,7 +14,7 @@ const Problems = () => {
             const axiosInstance = axios.create({});
             const output = await axiosInstance({
               method : "GET",
-              url : "http://localhost:4000/api/v1/problems/getallProblems",
+              url : "https://eatsleepcode.onrender.com/api/v1/problems/getallProblems",
               data : null,
               headers : null,
             });
