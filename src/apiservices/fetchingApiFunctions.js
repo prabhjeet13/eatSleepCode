@@ -117,7 +117,7 @@ export const addproblemTestCaseByCoder = async(bodyData,token,dispatch) => {
             try {
             const ob = {
                 ...bodyData,
-                token,
+                // token,
             }
             const output = await apiConnect("POST",problemsAPI.addTestCase,ob);
             console.log(output);
@@ -141,7 +141,7 @@ export const CodeExecuteOnRunButton = async(bodyData,token,setverdict,setrunbtnd
     try {
         const ob = {
             ...bodyData,
-            token,
+            // token,
         }
         // console.log('fetch mai',ob);
         const output = await apiConnect("POST",problemsAPI.executeProblemRun,ob);
@@ -165,7 +165,7 @@ export const CodeExecuteOnSubmitButton = async(bodyData,token,setverdict,setsubm
     try {
         const ob = {
             ...bodyData,
-            token,
+            // token,
         }
         // console.log('fetch mai',ob);
         const output = await apiConnect("POST",problemsAPI.executeProblemSubmit,ob);
