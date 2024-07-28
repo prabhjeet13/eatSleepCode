@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const {addTestcases,addProblem,editProblem,getProblemByTag,getProblemById,getallProblems} = require('../Controllers/Problems');
-const {auth,isCoder} = require('../Middlewares/Auth');
+const {auth,isCoder, isAdmin} = require('../Middlewares/Auth');
 
-router.post('/addproblem',auth,isCoder,addProblem);
-router.post('/addtestcases',auth,isCoder,addTestcases);
-router.post('/editproblem',auth,isCoder,editProblem);
+router.post('/addproblem',auth,isAdmin,addProblem);
+router.post('/addtestcases',auth,isAdmin,addTestcases);
+router.post('/editproblem',auth,editProblem);
 
 
 router.post('/getallproblemsByTagWise',getProblemByTag);
