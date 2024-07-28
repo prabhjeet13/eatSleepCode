@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 const cors = require('cors');
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: "https://eatsleepcode.vercel.app",
         credentials: true,
     })
 )

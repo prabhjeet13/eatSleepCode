@@ -5,6 +5,7 @@ const User = require("../Models/User");
 const otp_generator = require("otp-generator");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { TbRuler3 } = require("react-icons/tb");
 require('dotenv').config();
 
 exports.sendOtp = async(req,res) => {
@@ -203,7 +204,9 @@ exports.signIn = async(req,res) => {
 
             const options = {
                 expires :  new Date(Date.now() + 3*24*60*60*1000),
-                httpOnly : true,
+                httpOnly : false,
+                sameSite:"none",
+                secure:true
             }
             res.cookie("token",token,options).status(200).json({
                 success: true,
