@@ -64,7 +64,7 @@ exports.executeyourcodeonRun = async(req,res) => {
             verdict = "accepted";
         }  
         else {
-            return res.status(200).json({"success" : true, codercode_filepath,output,verdict : "wrong answer"});
+            return res.status(200).json({success : true, codercode_filepath,output,verdict : "wrong answer"});
         }
 
        if(customInput)

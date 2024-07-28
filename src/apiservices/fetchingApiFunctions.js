@@ -146,7 +146,7 @@ export const CodeExecuteOnRunButton = async(bodyData,setverdict,setrunbtndisable
         // console.log('fetch mai',ob);
         const output = await apiConnect("POST",problemsAPI.executeProblemRun,ob);
         console.log('yah pai',output);
-        if(output.statusText !== "OK")
+        if(!output.data.success)
         {
                 throw new Error("not able to execute");
         }
@@ -170,7 +170,7 @@ export const CodeExecuteOnSubmitButton = async(bodyData,setverdict,setsubmitbtnd
         // console.log('fetch mai',ob);
         const output = await apiConnect("POST",problemsAPI.executeProblemSubmit,ob);
         // console.log('yah pai',output);
-        if(output.statusText !== "OK")
+        if(!output.data.success)
         {
                 throw new Error("not able to execute");
         }
