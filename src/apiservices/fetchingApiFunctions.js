@@ -136,7 +136,7 @@ export const addproblemTestCaseByCoder = async(bodyData,token,dispatch) => {
         toast.dismiss(toastid);
 }
 
-export const CodeExecuteOnRunButton = async(bodyData,token,setverdict,setrunbtndisable) => {
+export const CodeExecuteOnRunButton = async(bodyData,setverdict,setrunbtndisable) => {
     const toastid = toast.loading('running');
     try {
         const ob = {
@@ -145,7 +145,7 @@ export const CodeExecuteOnRunButton = async(bodyData,token,setverdict,setrunbtnd
         }
         // console.log('fetch mai',ob);
         const output = await apiConnect("POST",problemsAPI.executeProblemRun,ob);
-        // console.log('yah pai',output);
+        console.log('yah pai',output);
         if(output.statusText !== "OK")
         {
                 throw new Error("not able to execute");
@@ -160,7 +160,7 @@ export const CodeExecuteOnRunButton = async(bodyData,token,setverdict,setrunbtnd
     }
     toast.dismiss(toastid);
 }
-export const CodeExecuteOnSubmitButton = async(bodyData,token,setverdict,setsubmitbtndisable) => {
+export const CodeExecuteOnSubmitButton = async(bodyData,setverdict,setsubmitbtndisable) => {
     const toastid = toast.loading('submitting');
     try {
         const ob = {

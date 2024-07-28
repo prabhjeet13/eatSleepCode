@@ -8,7 +8,7 @@ const ExecutePage = () => {
     const [runbtnDisable,setrunbtndisable] = useState(true);
     const [submitbtnDisable,setsubmitbtndisable] = useState(true);
     const [verdict,setverdict] = useState("output will display here");
-    const {token} = useSelector((state) => state.auth);
+    // const {token} = useSelector((state) => state.auth);
     const [CoderExecuteData,setCoderExecuteData] = useState({
         code : "",
         customInput : "",
@@ -35,7 +35,7 @@ const ExecutePage = () => {
             
             // console.log('ttttaaaa');
             setrunbtndisable(false);
-            CodeExecuteOnRunButton(bodyData,token,setverdict,setrunbtndisable);
+            CodeExecuteOnRunButton(bodyData,setverdict,setrunbtndisable);
             // setrunbtndisable(true);
             // console.log(output);
             // setverdict(output.verdict);
@@ -53,7 +53,7 @@ const ExecutePage = () => {
             }
             // console.log('ttttaaaa');
             setsubmitbtndisable(false);
-            CodeExecuteOnSubmitButton(bodyData,token,setverdict,setsubmitbtndisable);
+            CodeExecuteOnSubmitButton(bodyData,setverdict,setsubmitbtndisable);
             // console.log(output);
             // setverdict(output.verdict);
 
