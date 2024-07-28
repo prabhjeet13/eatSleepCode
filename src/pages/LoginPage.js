@@ -31,7 +31,7 @@ const LoginPage = () => {
   return (
     <div className='mx-auto max-w-[1260px] md:flex md:flex-row md:mt-5 justify-evenly items-center md:gap-3 flex flex-col-reverse sm:gap-52 sm:mt-36 mt-10'>
   
-      <div className='md:w-[40%] flex flex-col gap-2 w-11/12 max-500:mb-56'>
+      <div className='md:w-[40%] flex flex-col gap-2 w-11/12'>
           <p className='text-xl font-semibold font-mono uppercase'> welcome again to eatsleepcode !!!</p>
           <form className='flex flex-col gap-5 font-semibold' onSubmit={onSubmitHandler}>
               <div className='flex flex-col gap-1'>

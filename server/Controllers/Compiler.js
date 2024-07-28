@@ -59,7 +59,7 @@ exports.executeyourcodeonRun = async(req,res) => {
 
         const output = await executecpp(codercode_filepath,default_testcase_filepath);
         var verdict = "wrong answer";
-        console.log(output,testcase_output,problemDetails.testCases[0]._id);
+        // console.log(output,testcase_output,problemDetails.testCases[0]._id);
         if(output === testcase_output) {
             verdict = "accepted";
         }  
@@ -202,7 +202,7 @@ exports.executeyourcodeonSubmit = async(req,res) => {
 exports.executeyourcodeIDE = async(req,res) => {
         try {
         // default lang is cpp
-        console.log(req.body);
+        // console.log(req.body);
         const {language,code,customInput} = req.body;
         // console.log(req.body);
         if(!language || !code) {

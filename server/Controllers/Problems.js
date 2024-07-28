@@ -5,7 +5,7 @@ exports.addProblem = async(req,res) => {
 
     try {
         const {problemName,problemStatement,tag,constraints,code} = req.body;
-        console.log(req.body);
+        // console.log(req.body);
         const coderId = req.user.id; 
 
         if(!problemName || !problemStatement || !constraints || !tag || !coderId || !code)
@@ -83,7 +83,7 @@ exports.addTestcases = async(req,res) => {
             {new : true}
         );
 
-        console.log(problemDetails);
+        // console.log(problemDetails);
 
         const userDetails = await User.findById({_id: coderId})
                                         .populate("problemsCreated").exec();
