@@ -13,12 +13,12 @@ if(!fs.existsSync(outputDirectory))
 exports.executecpp = async(filepath,inputpath) => {
 
     const jobId = path.basename(filepath).split('.')[0];
-    const output_filename = `${jobId}.exe`;
+    const output_filename = `${jobId}.out`;
     const outPath = path.join(outputDirectory,output_filename);
 
 
     return new Promise((resolve,reject) => (
-        exec(`g++ ${filepath} -o ${outPath} && cd ${outputDirectory} && .\\${output_filename} < ${inputpath}`,(error,stdout,stderr) => {
+        exec(`g++ ${filepath} -o ${outPath} && cd ${outputDirectory} && ./${output_filename} < ${inputpath}`,(error,stdout,stderr) => {
             if(error)
             {
                 reject({error,stderr})

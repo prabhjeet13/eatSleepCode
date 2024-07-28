@@ -13,12 +13,12 @@ if(!fs.existsSync(outputDirectory))
 exports.executecppIDE1 = async(filepath,inputpath) => {
 
     const jobId = path.basename(filepath).split('.')[0];
-    const output_filename = `${jobId}.exe`;
+    const output_filename = `${jobId}.out`;
     const outPath = path.join(outputDirectory,output_filename);
     // console.log('ffhhfhfhfhfhffhf');
 
     return new Promise((resolve,reject) => (
-        exec(`g++ ${filepath} -o ${outPath} && cd ${outputDirectory} && .\\${output_filename} < ${inputpath}`,(error,stdout,stderr) => {
+        exec(`g++ ${filepath} -o ${outPath} && cd ${outputDirectory} && ./${output_filename} < ${inputpath}`,(error,stdout,stderr) => {
             if(error)
             {
                 reject({error,stderr})
@@ -34,12 +34,12 @@ exports.executecppIDE1 = async(filepath,inputpath) => {
 exports.executecppIDE2 = async(filepath) => {
 
     const jobId = path.basename(filepath).split('.')[0];
-    const output_filename = `${jobId}.exe`;
+    const output_filename = `${jobId}.out`;
     const outPath = path.join(outputDirectory,output_filename);
 
 
     return new Promise((resolve,reject) => (
-        exec(`g++ ${filepath} -o ${outPath} && cd ${outputDirectory} && .\\${output_filename}`,(error,stdout,stderr) => {
+        exec(`g++ ${filepath} -o ${outPath} && cd ${outputDirectory} && ./${output_filename}`,(error,stdout,stderr) => {
             if(error)
             {
                 reject({error,stderr})
