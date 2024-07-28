@@ -1,20 +1,20 @@
 
 export const problemsAPI = {
-    tagwise : "http://localhost:4000/api/v1/problems/getallproblemsByTagWise",
-    addProblem: "http://localhost:4000/api/v1/problems/addproblem",
-    addTestCase: "http://localhost:4000/api/v1/problems/addtestcases",
-    getProblemById : "http://localhost:4000/api/v1/problems/getProblemById",
-    executeProblemRun : "http://localhost:4000/api/v1/compiler/run",
-    executeProblemSubmit : "http://localhost:4000/api/v1/compiler/submit",
-    executeProblemIDE : "http://localhost:4000/api/v1/compiler/iderun",
+    tagwise : "https://eatsleepcode.onrender.com/api/v1/problems/getallproblemsByTagWise",
+    addProblem: "https://eatsleepcode.onrender.com/api/v1/problems/addproblem",
+    addTestCase: "https://eatsleepcode.onrender.com/api/v1/problems/addtestcases",
+    getProblemById : "https://eatsleepcode.onrender.com/api/v1/problems/getProblemById",
+    executeProblemRun : "https://eatsleepcode.onrender.com/api/v1/compiler/run",
+    executeProblemSubmit : "https://eatsleepcode.onrender.com/api/v1/compiler/submit",
+    executeProblemIDE : "https://eatsleepcode.onrender.com/api/v1/compiler/iderun",
 }
 
 export const userAPI = {
-    userDet : "http://localhost:4000/api/v1/user/details",
+    userDet : "https://eatsleepcode.onrender.com/api/v1/user/details",
 }
 
 export const authAPI = {
-    sendotpapi : "http://localhost:4000/api/v1/auth/sendotp",
-    signupapi : "http://localhost:4000/api/v1/auth/signup",
-    signinapi : "http://localhost:4000/api/v1/auth/signin"
+    sendotpapi : "https://eatsleepcode.onrender.com/api/v1/auth/sendotp",
+    signupapi : "https://eatsleepcode.onrender.com/api/v1/auth/signup",
+    signinapi : "https://eatsleepcode.onrender.com/api/v1/auth/signin"
 }
