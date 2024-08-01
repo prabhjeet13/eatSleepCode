@@ -28,7 +28,7 @@ const IDE = () => {
     
   return (
     <div className='w-11/12 max-w-[1260px] mx-auto flex flex-col items-center mt-5'>
-        <p className='text-xl font-mono text-black font-bold'> Meet Your @EAT_CODE_SLEEP IDE !!!</p>
+        <p className='text-xl font-mono text-black font-bold'> Meet Your @EAT_SLEEP_CODE IDE !!!</p>
 
         <div className='flex flex-row gap-5 mt-16'>
                 {/* compiler part */}

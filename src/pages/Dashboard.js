@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Outlet ,Link, useNavigate } from 'react-router-dom'
 import { setToken } from '../slices/authSlice';
 import { setUser } from '../slices/userSlice';
+import { setProblem, setStep,setedit } from '../slices/problemSlice';
 const Dashboard = () => {
 
   const {user} = useSelector((state) => state.user);
-
+  const {edit} = useSelector((state) => state.problem);
+ 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logoutHandler = () => {
@@ -34,7 +36,7 @@ const Dashboard = () => {
                         {
                             user.accountType === "Admin" && (
                               <Link to = "/dashboard/addproblem">
-                                <li className='cursor-pointer border-2 p-2'>Add Problem</li>
+                                <li onClick = {() => {dispatch(setProblem(null)); dispatch(setStep(1)); dispatch(setedit(false)) }} className='cursor-pointer border-2 p-2'>Add Problem</li>
                               </Link>
                               )
                         }
@@ -42,7 +44,7 @@ const Dashboard = () => {
                         {
                           user.accountType === "Admin" && (
                                 <Link to = "/dashboard/mycreatedproblems">
-                                    <li className='cursor-pointer border-2 p-2'>Created Problems</li>
+                                    <li className='cursor-pointer border-2 p-2'>MyCreated-Problems</li>
                                 </Link>
                           )
                         }

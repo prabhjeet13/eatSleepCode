@@ -7,6 +7,9 @@ export const problemsAPI = {
     executeProblemRun : "https://eatsleepcode.onrender.com/api/v1/compiler/run",
     executeProblemSubmit : "https://eatsleepcode.onrender.com/api/v1/compiler/submit",
     executeProblemIDE : "https://eatsleepcode.onrender.com/api/v1/compiler/iderun",
+    editProblem: "https://eatsleepcode.onrender.com/api/v1/problems/editproblem",
+    deleteTestCase : "https://eatsleepcode.onrender.com/api/v1/problems/deletetestcase",
+    editTestCase : "https://eatsleepcode.onrender.com/api/v1/problems/edittestcase",
 }
 
 export const userAPI = {

@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link, useResolvedPath } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import {FaArrowRight} from 'react-icons/fa'
 import { useSelector } from 'react-redux'
+import onlinejudgeimage from '../assets/images/onlinejudgeimage.jpg'
 const Home = () => {
   const {token} = useSelector((state) => state.auth);
   const {user} = useSelector((state) => state.user);
@@ -13,12 +14,14 @@ const Home = () => {
              
           { token === null && user === null && (
              <Link to = "/signup">
-                <div className='shadow-lg shadow-black text-orange-600 font-bold mt-16 px-4 py-2 rounded-full bg-blue-950 flex flex-row items-center justify-center gap-1 transition-all duration-200 hover:bg-blue-900 hover:scale-95'>
+                <div className='shadow-lg shadow-black text-orange-600 font-bold mt-5 px-4 py-2 rounded-full bg-blue-950 flex flex-row items-center justify-center gap-1 transition-all duration-200 hover:bg-blue-900 hover:scale-95'>
                       <p>Become a coder</p>
                       <FaArrowRight/>
                 </div>
              </Link>
           )} 
+
+          <img src = {onlinejudgeimage} className='w-11/12 h-[100vh] mt-5'/>
 
          </div>
 
