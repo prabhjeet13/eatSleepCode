@@ -10,26 +10,25 @@ const ProblemPage = () => {
 
   const {problemId} = useParams();
   const {token} = useSelector((state) => state.auth);
-  const [problemData,setProblemData] = useState(); 
+  const [problemData,setProblemData] = useState(null); 
 
   useEffect(() => {
-     const fetchProblemData = async() => {
-      const toastid = toast.loading('loading...');
-      try {
-        const output = await apiConnect("POST",problemsAPI.getProblemById,{problemId});
-        if(!output.data.success)
-        {
-            toast.error('Problem Not found');
-            throw new Error('problem at fetch problem part');
+      const fetch = async() => {
+        const toastid = toast.loading('loading...');
+        try {
+          const output = await apiConnect("POST",problemsAPI.getProblemById,{problemId});
+          if(!output.data.success)
+          {
+              toast.error('Problem Not found');
+              throw new Error('problem at fetch problem part');
+          }
+          setProblemData(output.data.problemDetails);    
+        }catch(error) {
+            console.log('problem at fetch problem part');
         }
-        setProblemData(output.data.problemDataById);
-        toast.success('Problem fetched successfully');
-      }catch(error) {
-          console.log('problem at fetch problem part');
+        toast.dismiss(toastid);
       }
-      toast.dismiss(toastid);
-     }
-    fetchProblemData();
+      fetch();
   },[])
 
   if(!problemData) {

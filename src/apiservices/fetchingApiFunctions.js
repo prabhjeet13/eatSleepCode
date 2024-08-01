@@ -4,7 +4,7 @@ import {problemsAPI, userAPI} from '../apiservices/allAPIs';
 import {authAPI} from '../apiservices/allAPIs';
 import { setToken } from '../slices/authSlice';
 import { setUser } from '../slices/userSlice';
-import { setStep ,setProblem } from '../slices/problemSlice';
+import { setStep ,setProblem , setedit} from '../slices/problemSlice';
 import toast from 'react-hot-toast';
 export const tagProblemsfromDatabase = async(tag) => {
 
@@ -44,7 +44,7 @@ export const sendOtp = async(emailAddress,navigate) => {
 }
 
 export const signup = async(signupData,otp,navigate) => {
-
+    const toastId = toast.loading("loading...");
         try {
              
             const bodyData = {
@@ -57,7 +57,7 @@ export const signup = async(signupData,otp,navigate) => {
             {
                 throw new Error('nhi ho rha at sign up part');
             }
-
+            toast.success('registration successfully');
             navigate("/signin")
             // if(output)
             // {
@@ -66,11 +66,12 @@ export const signup = async(signupData,otp,navigate) => {
         }catch(error){
             console.log('nhi ho rha at sign up part at otp enter side');
         }
+        toast.dismiss(toastId);
 }
 
 
 export const signIn = async(navigate,formData,dispatch) => {
-
+        const toastId = toast.loading("loading...");
         try {
             const result = await apiConnect("POST",authAPI.signinapi,formData);
 
@@ -83,41 +84,64 @@ export const signIn = async(navigate,formData,dispatch) => {
             localStorage.setItem("token",JSON.stringify(result.data.token));
             dispatch(setUser(result.data.existUser));
             dispatch(setToken(result.data.token));
+            toast.success('login successfully');
             navigate("/dashboard/myProfile");
         }catch(error)
         {
             console.log("error at login part");
         }
+        toast.dismiss(toastId);
     }
 
-export const addproblemByCoder = async(bodyData,token,dispatch) => {
+export const addproblemByCoder = async(bodyData,dispatch) => {
+        const toastId = toast.loading("loading...");    
         try {
-
             const ob = {
-                ...bodyData,
-                token,
+                ...bodyData
             }
             const output = await apiConnect("POST",problemsAPI.addProblem,ob);
-
+            console.log(output);
             if(output.statusText !== "OK")
             {
                 throw new Error('add problem mai issue');
             }
             console.log(output.data.problemDetails);
             dispatch(setProblem(output.data.problemDetails));
+            toast.success('problem details added');
             dispatch(setStep(2));
         }catch(error){
+            toast.error('error at add problem');
             console.log("error at add problem part");
+        }
+        toast.dismiss(toastId);
+}
+export const editProblem = async(bodyData,dispatch) => {
+        try {
+
+            const ob = {
+                ...bodyData
+            }
+            const output = await apiConnect("POST",problemsAPI.editProblem,ob);
+            if(!output.data.success)
+            {
+                throw new Error('edit problem mai issue');
+            }
+            console.log(output.data.problemDetails);
+            toast.success('edit successfull');
+            dispatch(setProblem(output.data.problemDetails));
+            dispatch(setStep(2));
+        }catch(error){
+            toast.error('something wrong');
+            console.log("error at edit problem part");
         }
 }
 
-export const addproblemTestCaseByCoder = async(bodyData,token,dispatch) => {
+export const addproblemTestCaseByCoder = async(bodyData,dispatch) => {
 
             let toastid = toast.loading("Loading..."); 
             try {
             const ob = {
                 ...bodyData,
-                token,
             }
             const output = await apiConnect("POST",problemsAPI.addTestCase,ob);
             console.log(output);
@@ -195,7 +219,61 @@ export const getrunyourcodeonIDE = async(bodyData,setrunbtndisable,setOutput) =>
            setrunbtndisable(true);
    }catch(error)
    {
-        toast.error('somthething wrong');
+        toast.error('something wrong');
         setrunbtndisable(true);
    } 
+}
+
+
+export const deletetestcase  = async(bodyData,dispatch) => {
+    const toastId = toast.loading('loading...');
+    try {
+        const output = await apiConnect("POST",problemsAPI.deleteTestCase,bodyData);
+
+        if(!output.data.success)
+        {
+            throw new Error('problem at deleting a testcase');
+        }
+        dispatch(setProblem(output.data.problemDetails));
+    }catch(error)
+    {
+        toast.error('something wrong');
+    }
+    toast.dismiss(toastId);
+}
+
+export const edittestcase  = async(bodyData,dispatch) => {
+    const toastId = toast.loading('loading...');
+    try {
+        const output = await apiConnect("POST",problemsAPI.editTestCase,bodyData);
+
+        if(!output.data.success)
+        {
+            throw new Error('problem at editing a testcase');
+        }
+        dispatch(setProblem(output.data.problemDetails));
+    }catch(error)
+    {
+        toast.error('something wrong');
+    }
+    toast.dismiss(toastId);
+}
+
+
+
+export const problemById = async(problemId,dispatch) => {
+      try {
+        const output = await apiConnect("POST",problemsAPI.getProblemById,{problemId});
+        // console.log(output);
+        if(!output.data.success)
+        {
+            toast.error('Problem Not found');
+            throw new Error('problem at fetch problem part');
+        }
+        dispatch(setProblem(output.data.problemDetails)); 
+        dispatch(setedit(true));
+        dispatch(setStep(1));   
+      }catch(error) {
+          console.log('problem at fetch problem part');
+      }
 }

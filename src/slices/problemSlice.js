@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     problemData : null,
     step : 1,
+    edit : false,
 }
 
 const problemSlice = createSlice({
@@ -14,9 +15,12 @@ const problemSlice = createSlice({
         },
         setStep(state,value) {
             state.step = value.payload;
+        },
+        setedit(state,value) {
+            state.edit= value.payload;
         }
     }
 })
 
-export const {setProblem,setStep} = problemSlice.actions;
+export const {setProblem,setStep,setedit} = problemSlice.actions;
 export default problemSlice.reducer;

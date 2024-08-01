@@ -81,7 +81,7 @@ exports.addTestcases = async(req,res) => {
                 }
             },
             {new : true}
-        );
+        ).populate("testCases").exec();
 
         // console.log(problemDetails);
 
@@ -108,9 +108,9 @@ exports.addTestcases = async(req,res) => {
 exports.editProblem = async(req,res) => {
 
     try {
-        const {problemId,problemName,problemStatement,tag,constraints} = req.body;
+        const {problemId,problemName,problemStatement,tag,constraints,code} = req.body;
 
-        if(!problemName || !problemStatement || !constraints || !tag || !problemId)
+        if(!problemName || !problemStatement || !tag || !constraints || !problemId || !code)
         {
             return res.status(404).json({
                 success: false,
@@ -124,10 +124,9 @@ exports.editProblem = async(req,res) => {
                                     problemName,
                                     problemStatement,
                                     constraints,
-                                    tag
-                                },{new : true});
-        
-       
+                                    tag,
+                                    code
+                                },{new : true}).populate("testCases").exec();
         
         return res.status(200).json({
             success: true,
@@ -185,11 +184,11 @@ exports.getProblemById = async(req,res) => {
 
         const {problemId} = req.body;
         // console.log(req.body);
-        const problemDataById = await Problems.findById({_id : problemId}).populate("testCases").exec();
+        const problemDetails = await Problems.findById({_id : problemId}).populate("testCases").exec();
         return res.status(200).json({
                 success : true,
                 message : 'details fetch completed',
-                problemDataById,
+                problemDetails,
         });                         
 
     }catch(error)
@@ -199,4 +198,83 @@ exports.getProblemById = async(req,res) => {
             message : 'internal error at problem fetching by id',
         })   
     }
+}
+
+exports.deleteaTestCase = async(req,res) => {
+
+    try {
+        const {testCaseId,problemId} = req.body;
+
+        if(!testCaseId || !problemId)
+        {
+                return res.status(404).json({
+                    success: false,
+                    message : 'enter all details'
+                });
+        }
+    
+        await Testcases.findByIdAndDelete({_id : testCaseId});
+    
+        const problemDetails = await Problems.findByIdAndUpdate(
+                                     {_id: problemId},
+                                     {
+                                        $pull : {
+                                            testCases : testCaseId,
+                                        }
+                                     },
+                                     {new : true}
+                                    ).populate("testCases").exec();
+    
+        return res.status(200).json({
+            success: true,
+            message: 'deleted completely',
+            problemDetails,
+        });
+    }catch(error)
+    {
+        return res.status(500).json({
+            success : false,
+            message : 'internal error at deleting a testcase',
+        })  
+    }
+
+
+
+}
+exports.editaTestCase = async(req,res) => {
+
+    try {
+        const {testCaseId,input,output,problemId} = req.body;
+
+        if(!testCaseId || !problemId || !input || !output)
+        {   console.log(testCaseId,problemId,input,output)
+                return res.status(404).json({
+                    success: false,
+                    message : 'enter all details'
+                });
+        }
+    
+        await Testcases.findByIdAndUpdate(
+                                     {_id: testCaseId},
+                                     {
+                                        input,
+                                        output,
+                                     });
+                                     
+        const problemDetails = await Problems.findById({_id:problemId}).populate("testCases").exec();                                     
+        return res.status(200).json({
+            success: true,
+            message: 'deleted completely',
+            problemDetails,
+        });
+    }catch(error)
+    {
+        return res.status(500).json({
+            success : false,
+            message : 'internal error at deleting a testcase',
+        })  
+    }
+
+
+
 }
