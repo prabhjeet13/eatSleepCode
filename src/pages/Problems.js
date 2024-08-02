@@ -4,12 +4,14 @@ import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Table,Tr, Td, Tbody,Th , Thead} from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import {toast} from 'react-hot-toast';
 const Problems = () => {
 
   const [problems,setProblems] = useState(null);
   
   useEffect( () => {
       const fetchingproblems = async() => {
+        const toastid = toast.loading('loading...');
         try {
             const axiosInstance = axios.create({});
             const output = await axiosInstance({
@@ -20,10 +22,12 @@ const Problems = () => {
             });
             console.log(output.data.allProblems[0]);
             setProblems(output.data.allProblems);
+            toast.success('problems fetched successfully');
         }catch(error)
         {
             console.log(error);
         }
+        toast.dismiss(toastid);
       }
       fetchingproblems();
   },[])

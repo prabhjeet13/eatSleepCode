@@ -211,17 +211,19 @@ export const CodeExecuteOnSubmitButton = async(bodyData,setverdict,setsubmitbtnd
 
 
 export const getrunyourcodeonIDE = async(bodyData,setrunbtndisable,setOutput) => {
-
+    const toastid = toast.loading('running'); 
    try {
         //    console.log("hello");
            const output = await apiConnect("POST",problemsAPI.executeProblemIDE,bodyData);
            setOutput(output.data.your_output)
            setrunbtndisable(true);
+           toast.success('your code run successfully');
    }catch(error)
    {
         toast.error('something wrong');
         setrunbtndisable(true);
    } 
+   toast.dismiss(toastid);
 }
 
 

@@ -5,15 +5,19 @@ import { HiChevronDown } from 'react-icons/hi'
 import {Table, Thead, Tbody, Th, Tr,Td} from 'react-super-responsive-table';
 import {tagProblemsfromDatabase} from '../apiservices/fetchingApiFunctions';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import {toast} from 'react-hot-toast';
 const ProblemsByTagPage = () => {
   const {tag} = useParams();
   const [TagProblems,setTagProblems] = useState([]);
 
   useEffect(() => {
          const fetchttagproblems = async() => {
+            const toastid = toast.loading('loading...');
             const output = await tagProblemsfromDatabase(tag);
             console.log(output);
             setTagProblems(output);
+            toast.success('problems fetched successfully');
+            toast.dismiss(toastid);
          }
          fetchttagproblems();
   },[tag]);
