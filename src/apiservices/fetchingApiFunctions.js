@@ -172,8 +172,8 @@ export const CodeExecuteOnRunButton = async(bodyData,setverdict,setrunbtndisable
         }
         // console.log('fetch mai',ob);
         const output = await apiConnect("POST",problemsAPI.executeProblemRun,ob);
-        console.log('yah pai',output);
-        if(!output.data.success)
+        // console.log('yah pai',output);
+        if(output.data.verdict !== "accepted")
         {
                 throw new Error("not able to execute");
         }
