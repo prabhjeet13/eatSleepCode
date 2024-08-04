@@ -104,7 +104,7 @@ export const addproblemByCoder = async(bodyData,dispatch) => {
             }
             const output = await apiConnect("POST",problemsAPI.addProblem,ob);
             console.log(output);
-            if(output.statusText !== "OK")
+            if(!output.data.success)
             {
                 throw new Error('add problem mai issue');
             }
