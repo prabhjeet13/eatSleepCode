@@ -125,7 +125,7 @@ export const editProblem = async(bodyData,dispatch) => {
                 ...bodyData
             }
             const output = await apiConnect("POST",problemsAPI.editProblem,ob);
-            if(!output.data.success)
+            if(output.status != 200)
             {
                 throw new Error('edit problem mai issue');
             }
@@ -148,7 +148,7 @@ export const addproblemTestCaseByCoder = async(bodyData,dispatch) => {
             }
             const output = await apiConnect("POST",problemsAPI.addTestCase,ob);
             console.log(output);
-            if(output.statusText !== "OK")
+            if(output.status != 200)
             {
                 throw new Error('add problem kai Test Cases mai issue');
             }
