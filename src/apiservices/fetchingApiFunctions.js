@@ -26,7 +26,7 @@ export const tagProblemsfromDatabase = async(tag) => {
 }
 
 export const sendOtp = async(emailAddress,navigate) => {
-
+    const toastId = toast.loading("loading...");
     // otp send krke verify email page pai jao
     try {
         const output = await apiConnect("POST",authAPI.sendotpapi,{emailAddress});
@@ -39,8 +39,10 @@ export const sendOtp = async(emailAddress,navigate) => {
         navigate("/verifyemail");
     }catch(error)
     {
+        toast.error('something wrong! please recheck your details');
         console.log('nhi hora at otp sending connecting apiConnect')
     }
+    toast.dismiss(toastId);
 }
 
 export const signup = async(signupData,otp,navigate) => {
@@ -64,6 +66,7 @@ export const signup = async(signupData,otp,navigate) => {
             //    toast.success('registration successfully')
             // }
         }catch(error){
+            toast.error('something wrong! please recheck your details');
             console.log('nhi ho rha at sign up part at otp enter side');
         }
         toast.dismiss(toastId);
