@@ -239,6 +239,7 @@ export const deletetestcase  = async(bodyData,dispatch) => {
         {
             throw new Error('problem at deleting a testcase');
         }
+        toast.success('testcase deleted');
         dispatch(setProblem(output.data.problemDetails));
     }catch(error)
     {
@@ -256,6 +257,7 @@ export const edittestcase  = async(bodyData,dispatch) => {
         {
             throw new Error('problem at editing a testcase');
         }
+        toast.success('testcase edited');
         dispatch(setProblem(output.data.problemDetails));
     }catch(error)
     {
