@@ -33,20 +33,6 @@ const ExecutePage = () => {
         fetch();
     },[])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const [CoderExecuteData,setCoderExecuteData] = useState({
         code : "",
         customInput : "",
