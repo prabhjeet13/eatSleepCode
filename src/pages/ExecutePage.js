@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import { useSelector } from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { problemsAPI } from '../apiservices/allAPIs';
 import { CodeExecuteOnRunButton,CodeExecuteOnSubmitButton } from '../apiservices/fetchingApiFunctions';
 const ExecutePage = () => {
     
@@ -9,6 +11,42 @@ const ExecutePage = () => {
     const [submitbtnDisable,setsubmitbtndisable] = useState(true);
     const [verdict,setverdict] = useState("output will display here");
     // const {token} = useSelector((state) => state.auth);
+
+    const [problemData,setProblemData] = useState(null);
+
+    useEffect(() => {
+        const fetch = async() => {
+          const toastid = toast.loading('loading...');
+          try {
+            const output = await apiConnect("POST",problemsAPI.getProblemById,{problemId});
+            if(!output.data.success)
+            {
+                toast.error('Problem Not found');
+                throw new Error('problem at fetch problem part');
+            }
+            setProblemData(output.data.problemDetails);    
+          }catch(error) {
+              console.log('problem at fetch problem part');
+          }
+          toast.dismiss(toastid);
+        }
+        fetch();
+    },[])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const [CoderExecuteData,setCoderExecuteData] = useState({
         code : "",
         customInput : "",
@@ -67,9 +105,42 @@ const ExecutePage = () => {
   return (
 
     <div className='w-11/12 max-w-[1260px] mx-auto flex flex-col gap-5 justify-between items-center mt-5'>
-            <Link to = {`/problems/problem/${problemId}`}>
+            {/* <Link to = {`/problems/problem/${problemId}`}>
                 <div className='border-2 bg-black shadow-md shadow-black text-white p-2 rounded-md transition-all duration-200 hover:scale-90 cursor-pointer font-bold text-xl'> View Problem </div>
-            </Link>
+            </Link> */}
+
+                {
+                    problemData && (
+                    <div className='mt-4 border-2 border-rose-950'>
+                        <p className='text-3xl font-mono uppercase font-bold text-black'>{problemData.problemName} </p> 
+                        <div className='text-2xl font-mono font-bold text-black'>
+                            {problemData.problemStatement}
+                        </div>
+                        <div className='flex flex-row flex-wrap gap-4 text-black font-mono font-bold text-xl'>
+                        <p>Constraints:</p>
+                        { problemData.constraints.map((ele,index) => {
+                            return (<div>{ele},</div>
+                            )
+                        }) }
+                        </div>  
+                        <div className='mr-20 flex flex-row gap-3 text-black font-mono text-xl font-bold'>
+                            <p>Input:</p>
+                            {
+                            problemData.testCases[0].input
+                            }
+                        </div>
+                        <div className='mr-20 flex flex-row gap-3 text-black font-mono text-xl font-bold'>
+                            <p> Output:</p>
+                            {
+                            problemData.testCases[0].output
+                            }
+                        </div>
+                    </div>)
+                }
+
+
+
+
 
             <div className='flex flex-row gap-5 mt-2'>
                 {/* compiler part */}
