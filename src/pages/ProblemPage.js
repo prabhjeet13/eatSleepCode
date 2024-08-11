@@ -45,7 +45,7 @@ const ProblemPage = () => {
     <div className='w-11/12 max-w-[1260px] mx-auto flex flex-col gap-5 items-center justify-between mt-5'> 
            {
              problemData &&  (
-              <>
+              <div className='border-2 border-rose-950'>
                 <p className='text-3xl font-mono uppercase font-bold text-black'>{problemData.problemName} </p> 
                 <div className='text-2xl font-mono font-bold text-black'>
                     {problemData.problemStatement}
@@ -78,7 +78,7 @@ const ProblemPage = () => {
                      </Link>
                     )
                 }
-              </>
+              </div>
              )
            } 
     </div>

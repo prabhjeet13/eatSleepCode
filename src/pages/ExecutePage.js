@@ -98,7 +98,7 @@ const ExecutePage = () => {
 
                 {
                     problemData && (
-                    <div className='mt-4 border-2 border-rose-950'>
+                    <div className='mt-4 border-2 border-rose-950 mb-10'>
                         <p className='text-3xl font-mono uppercase font-bold text-black'>{problemData.problemName} </p> 
                         <div className='text-2xl font-mono font-bold text-black'>
                             {problemData.problemStatement}
